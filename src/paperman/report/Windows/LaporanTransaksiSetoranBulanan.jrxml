@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LaporanTransaksiSetoranBulanan" language="groovy" pageWidth="612" pageHeight="396" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nLambung" class="java.lang.Integer"/>
+	<field name="nrp" class="java.lang.String"/>
+	<field name="nama" class="java.lang.String"/>
+	<field name="setKe" class="java.lang.Integer"/>
+	<field name="tglJatuhTempo" class="java.util.Date"/>
+	<field name="tglSPO" class="java.util.Date"/>
+	<field name="angsuran" class="java.math.BigDecimal"/>
+	<field name="tabungan" class="java.math.BigDecimal"/>
+	<field name="kasbon" class="java.math.BigDecimal"/>
+	<field name="bayarKasbon" class="java.math.BigDecimal"/>
+	<field name="cicilanKas" class="java.math.BigDecimal"/>
+	<field name="overtime" class="java.math.BigDecimal"/>
+	<field name="totalAngsur" class="java.math.BigDecimal"/>
+	<field name="keterangan" class="java.lang.String"/>
+	<variable name="sumAngsuran" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{angsuran}]]></variableExpression>
+	</variable>
+	<variable name="sumTabungan" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{tabungan}]]></variableExpression>
+	</variable>
+	<variable name="sumKasbon" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{kasbon}]]></variableExpression>
+	</variable>
+	<variable name="sumBayar" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{bayarKasbon}]]></variableExpression>
+	</variable>
+	<variable name="sumCicilan" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{cicilanKas}]]></variableExpression>
+	</variable>
+	<variable name="sumOvertime" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{overtime}]]></variableExpression>
+	</variable>
+	<variable name="sumTotalKas" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalAngsur}]]></variableExpression>
+	</variable>
+	<group name="dataGroup">
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField pattern="Rp #,##0">
+					<reportElement x="24" y="0" width="75" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumAngsuran}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="25" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Serif" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL]]></text>
+				</staticText>
+				<textField pattern="Rp #,##0">
+					<reportElement x="99" y="0" width="75" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumTabungan}]]></textFieldExpression>
+				</textField>
+				<textField pattern="Rp #,##0">
+					<reportElement x="174" y="0" width="75" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumKasbon}]]></textFieldExpression>
+				</textField>
+				<textField pattern="Rp #,##0">
+					<reportElement x="249" y="0" width="75" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumBayar}]]></textFieldExpression>
+				</textField>
+				<textField pattern="Rp #,##0">
+					<reportElement x="324" y="0" width="75" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumCicilan}]]></textFieldExpression>
+				</textField>
+				<textField pattern="Rp #,##0">
+					<reportElement x="479" y="0" width="93" height="20"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumTotalKas}]]></textFieldExpression>
+				</textField>
+				<textField pattern="Rp #,##0">
+					<reportElement x="399" y="0" width="80" height="20"/>
+					<box>
+						<pen lineStyle="Double"/>
+						<topPen lineWidth="1.0" lineStyle="Double"/>
+						<leftPen lineStyle="Double"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+						<rightPen lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sumOvertime}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="151" height="16"/>
+				<textElement>
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PT. MANDALA SATATA GAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="151" height="14"/>
+				<textElement>
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VIRGO TAXI - SURABAYA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="32" width="173" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN SETORAN LIMO BULANAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="52" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BULAN :]]></text>
+			</staticText>
+			<textField pattern="MMMM-yy">
+				<reportElement x="275" y="52" width="91" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="528" y="0" width="18" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[dari]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="62" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HALAMAN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="502" y="0" width="26" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="24" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.LB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="14" width="75" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANGSURAN
+SETORAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="14" width="75" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TABUNGAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="14" width="75" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KASBON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="14" width="75" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CICILAN
+KS/BS/KB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="14" width="75" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAYAR KASBON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="14" width="80" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OVERTIME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="14" width="93" height="32"/>
+				<box>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TERIMA
+KAS]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="546" y="0" width="26" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21">
+			<textField>
+				<reportElement x="0" y="0" width="24" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nLambung}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="24" y="0" width="75" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{angsuran}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="99" y="0" width="75" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tabungan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="174" y="0" width="75" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kasbon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="249" y="0" width="75" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bayarKasbon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="324" y="0" width="75" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cicilanKas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="399" y="0" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{overtime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="479" y="0" width="93" height="20"/>
+				<box>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalAngsur}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-2.5.xsd
+          http://www.springframework.org/schema/tx
+          http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <context:property-placeholder location="classpath:server.properties"/>
+
+    <bean id="masterServices" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
+          p:serviceUrl="http://${server.ip}:${server.port}/paperman-server-httpInvoker/MasterService"
+          p:serviceInterface="paperman.service.MasterService"
+    />
+    <bean id="transaksiServices" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
+          p:serviceUrl="http://${server.ip}:${server.port}/paperman-server-httpInvoker/TransaksiService"
+          p:serviceInterface="paperman.service.TransaksiService"
+    />
+    <bean id="sistemServices" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
+          p:serviceUrl="http://${server.ip}:${server.port}/paperman-server-httpInvoker/SistemService"
+          p:serviceInterface="paperman.service.SistemService"
+    />
+    <bean id="reportServices" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
+          p:serviceUrl="http://${server.ip}:${server.port}/paperman-server-httpInvoker/ReportService"
+          p:serviceInterface="paperman.service.ReportService"
+    />
+</beans>

@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1052.3622"
+   height="744.09448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47pre4 r22446"
+   sodipodi:docname="paperman.svg"
+   inkscape:export-filename="/media/251 GB/erpylones/RESEARCH&amp;DEVELOPMENT/JavaResearch/ProgressProject/paperman/paperman.png"
+   inkscape:export-xdpi="81.769997"
+   inkscape:export-ydpi="81.769997">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3139"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="542.91154"
+     inkscape:cy="389.80553"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1024"
+     inkscape:window-height="721"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-308.2677)">
+    <rect
+       style="fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:5.25992393000000025;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2824"
+       width="245.38466"
+       height="179.80888"
+       x="384.45053"
+       y="566.74347" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2828"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="matrix(0.70909091,0,0,0.69066669,232.63188,282.90215)"><flowRegion
+         id="flowRegion2830"><rect
+           id="rect2832"
+           width="274.28571"
+           height="234.28571"
+           x="282.85715"
+           y="460.93362" /></flowRegion><flowPara
+         id="flowPara2834">Aplikasi Payroll Taxi Mandala</flowPara><flowPara
+         id="flowPara2836" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2838"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><flowRegion
+         id="flowRegion2840"><rect
+           id="rect2842"
+           width="40"
+           height="82.85714"
+           x="508.57144"
+           y="615.2193" /></flowRegion><flowPara
+         id="flowPara2844" /></flowRoot>    <rect
+       y="318.35928"
+       x="15.997149"
+       height="58.00568"
+       width="105.14852"
+       id="rect2860"
+       style="fill:#ff5555;fill-opacity:1;stroke:#000000;stroke-width:2.70860528999999994;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.55841851000000009;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2868"
+       width="101.01301"
+       height="53.870155"
+       x="597.35779"
+       y="955.33063" />
+    <rect
+       y="939.07416"
+       x="11.470537"
+       height="68.415726"
+       width="103.61006"
+       id="rect2870"
+       style="fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:2.92003297999999978;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2854"
+       width="217.14285"
+       height="95.714287"
+       x="41.42857"
+       y="456.64789" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2874"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(31.428571,442.55342)"><flowRegion
+         id="flowRegion2876"><rect
+           id="rect2878"
+           width="201.42857"
+           height="78.571426"
+           x="54.285713"
+           y="42.665909"
+           style="font-size:20px" /></flowRegion><flowPara
+         id="flowPara2880">Master Data</flowPara></flowRoot>    <rect
+       style="fill:#008000;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2866"
+       width="217.14285"
+       height="95.714287"
+       x="34.285721"
+       y="755.2193" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2882"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(-191.42857,738.2677)"><flowRegion
+         id="flowRegion2884"><rect
+           id="rect2886"
+           width="111.42857"
+           height="24.285717"
+           x="281.42856"
+           y="46.951626"
+           style="font-size:20px" /></flowRegion><flowPara
+         id="flowPara2888">Transaksi</flowPara></flowRoot>    <rect
+       y="452.36215"
+       x="757.14282"
+       height="95.714287"
+       width="217.14285"
+       id="rect2864"
+       style="fill:#0000ff;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2890"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(311.42857,439.69626)"><flowRegion
+         id="flowRegion2892"><rect
+           id="rect2894"
+           width="208.57143"
+           height="94.285713"
+           x="502.85715"
+           y="36.951626"
+           style="font-size:20px" /></flowRegion><flowPara
+         id="flowPara2896">Laporan</flowPara></flowRoot>    <rect
+       style="fill:#008080;fill-opacity:1;stroke:#000000;stroke-width:5.32693194999999964;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2862"
+       width="246.46761"
+       height="95.714287"
+       x="758.90906"
+       y="743.79077" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2898"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="matrix(1.1350482,0,0,1,-3.194771,725.41057)"><flowRegion
+         id="flowRegion2900"><rect
+           id="rect2902"
+           width="211.42857"
+           height="82.85714"
+           x="728.57141"
+           y="45.523052"
+           style="font-size:20px" /></flowRegion><flowPara
+         id="flowPara2906">Utility</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:2.04004478;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 630.02002,618.05645 99.61799,0 0,-122.81711 28.24987,0"
+       id="path2952" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 627.14286,356.95163 97.14285,0 0,121.42857 31.42858,0"
+       id="path2954"
+       transform="translate(0,308.2677)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.10167718;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 384.16309,618.02563 -89.99293,0 0,-122.75547 -36.31294,0"
+       id="path2956" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.03962636;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 383.60238,666.66771 -87.68408,0 0,137.10323 -41.61278,0"
+       id="path2958" />
+    <rect
+       style="fill:#ff5555;fill-opacity:1;stroke:#000000;stroke-width:2.70860528999999994;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3732"
+       width="105.14852"
+       height="58.00568"
+       x="133.14"
+       y="318.35928" />
+    <rect
+       y="955.33069"
+       x="922.34698"
+       height="53.870155"
+       width="101.01301"
+       id="rect3744"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.55841851000000009;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.55841851000000009;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3746"
+       width="101.01301"
+       height="53.870155"
+       x="705.68927"
+       y="955.87518" />
+    <rect
+       y="955.87524"
+       x="814.50574"
+       height="53.870155"
+       width="101.01301"
+       id="rect3748"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.55841851000000009;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3750"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:40px"><flowRegion
+         id="flowRegion3752"><rect
+           id="rect3754"
+           width="98.571426"
+           height="52.857143"
+           x="17.142857"
+           y="12.665911" /></flowRegion><flowPara
+         id="flowPara3756" /></flowRoot>    <flowRoot
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:40px"
+       id="flowRoot3758"
+       xml:space="preserve"><flowRegion
+         id="flowRegion3760"><rect
+           y="12.665911"
+           x="17.142857"
+           height="52.857143"
+           width="98.571426"
+           id="rect3762" /></flowRegion><flowPara
+         id="flowPara3764" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3766"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(-1.0101525,313.31846)"><flowRegion
+         id="flowRegion3768"><rect
+           id="rect3770"
+           width="95.714287"
+           height="54.285713"
+           x="22.857143"
+           y="9.8087673"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3772">Data Kendaraan</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3774"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(0,308.2677)"><flowRegion
+         id="flowRegion3776"><rect
+           id="rect3778"
+           width="100"
+           height="54.285713"
+           x="135.71428"
+           y="11.237339"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3780">Data Pengemudi</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 145.71429,146.95163 0,-47.142862 -85.71429,0 0,-32.857143"
+       id="path2910"
+       transform="translate(0,308.2677)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.00970376px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 145.48712,407.88 51.50807,0 0,-32.31517"
+       id="path2912" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2914"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:12"><flowRegion
+         id="flowRegion2916"><rect
+           id="rect2918"
+           width="88.893425"
+           height="48.487324"
+           x="663.67023"
+           y="14.764345"
+           style="font-size:12" /></flowRegion><flowPara
+         id="flowPara2920" /></flowRoot>    <rect
+       style="fill:#00ffff;fill-opacity:1;stroke:#000000;stroke-width:2.51314831000000005;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2872"
+       width="92.486847"
+       height="56.772568"
+       x="593.93353"
+       y="314.22092" />
+    <rect
+       y="314.22092"
+       x="701.07642"
+       height="56.772568"
+       width="92.486847"
+       id="rect3736"
+       style="fill:#00ffff;fill-opacity:1;stroke:#000000;stroke-width:2.51314831000000005;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       style="fill:#00ffff;fill-opacity:1;stroke:#000000;stroke-width:2.82406521000000010;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3738"
+       width="117.42974"
+       height="56.461651"
+       x="811.23187"
+       y="314.37637" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2922"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="matrix(1.173176,0,0,0.94159913,-181.96066,299.27777)"><flowRegion
+         id="flowRegion2924"><rect
+           id="rect2926"
+           width="92.934036"
+           height="60.609154"
+           x="664.68036"
+           y="14.764345"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara2928">Laporan Setoran Harian</flowPara><flowPara
+         id="flowPara2930" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2932"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(-59.599001,303.21694)"><flowRegion
+         id="flowRegion2934"><rect
+           id="rect2936"
+           width="95.964493"
+           height="59.598999"
+           x="766.70581"
+           y="8.7034302"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara2938">Laporan Rekap Setoran</flowPara><flowPara
+         id="flowPara2940" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2942"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="matrix(1.2732161,0,0,1,-306.1712,306.2474)"><flowRegion
+         id="flowRegion2944"><rect
+           id="rect2946"
+           width="91.923882"
+           height="65.659912"
+           x="878.8327"
+           y="8.7034302"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara2948"
+         style="font-size:14.17976093px">Kartu Pembayaran Angsuran</flowPara></flowRoot>    <rect
+       y="313.32458"
+       x="935.43903"
+       height="56.544945"
+       width="110.44196"
+       id="rect3018"
+       style="fill:#00ffff;fill-opacity:1;stroke:#000000;stroke-width:2.74077152999999996;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3020"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="matrix(1,0,0,0.8099468,3.0304576,312.80722)"><flowRegion
+         id="flowRegion3022"><rect
+           id="rect3024"
+           width="106.06602"
+           height="75.039268"
+           x="937.42157"
+           y="3.652667"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3026">Laporan Data Kendaraan</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 861.66012,142.04357 0,-31.31473 -216.17264,0 0,-47.477173 3.03045,0"
+       id="path3028"
+       transform="translate(0,308.2677)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.02151239px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 748.5338,419.99593 0,-48.46581 0.98863,0"
+       id="path3030" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.01043284px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 862.67541,372.57728 -1.01007,0 0,46.41404 129.28909,0 0,-48.47689"
+       id="path3032" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3034"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(7.0710678,309.27785)"><flowRegion
+         id="flowRegion3036"><rect
+           id="rect3038"
+           width="105.05586"
+           height="66.670067"
+           x="9.0913725"
+           y="630.9574"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3040">Setoran</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3050"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(0,308.2677)"><flowRegion
+         id="flowRegion3052"><rect
+           id="rect3054"
+           width="115.15739"
+           height="66.670067"
+           x="234.35539"
+           y="631.96753"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3056" /></flowRoot>    <g
+       id="g3124"
+       transform="translate(-27.142857,0)">
+      <rect
+         style="fill:#00ff00;fill-opacity:1;stroke:#000000;stroke-width:2.96234465;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3742"
+         width="111.64897"
+         height="65.342957"
+         x="236.12404"
+         y="940.10541" />
+      <flowRoot
+         transform="translate(5.0507627,307.25755)"
+         style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         id="flowRoot3058"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3060"><rect
+             style="font-size:16px"
+             y="632.97772"
+             x="234.35539"
+             height="62.629459"
+             width="115.15739"
+             id="rect3062" /></flowRegion><flowPara
+           id="flowPara3064">Manjemen Piutang</flowPara></flowRoot>    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 875.80226,530.9523 0,45.45686 -239.40616,0 0,70.71068 0,-2.02031"
+       id="path3066"
+       transform="translate(0,308.2677)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.0143913px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 757.61441,884.71166 0,70.68169"
+       id="path3068" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.00703382px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 875.78547,955.34938 0,-70.68931 103.02852,0 0,71.7138"
+       id="path3070" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3072"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(2.0203051,307.25755)"><flowRegion
+         id="flowRegion3074"><rect
+           id="rect3076"
+           width="97.984795"
+           height="52.527931"
+           x="598.01031"
+           y="649.14014"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3080">Proses Akhir Bulan</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3084"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(1.0101525,308.2677)"><flowRegion
+         id="flowRegion3086"><rect
+           id="rect3088"
+           width="98.994949"
+           height="49.497475"
+           x="705.08649"
+           y="648.13"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3090">Proses Akhir Tahun</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3092"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(3.0304576,312.30831)"><flowRegion
+         id="flowRegion3094"><rect
+           id="rect3096"
+           width="101.01525"
+           height="56.568542"
+           x="815.19312"
+           y="644.08936"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3098">Input Saldo Awal</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3100"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(1.0101525,308.2677)"><flowRegion
+         id="flowRegion3102"><rect
+           id="rect3104"
+           width="97.984795"
+           height="52.527931"
+           x="923.27942"
+           y="647.11981"
+           style="font-size:16px" /></flowRegion><flowPara
+         id="flowPara3106">Input Bonus Bulanan</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 156.57364,544.08428 0,36.36549 -106.066013,0 0,49.49747"
+       id="path3110"
+       transform="translate(0,308.2677)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.98730713px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 156.02666,852.85292 0,36.37087 103.37526,0 0,49.50479"
+       id="path3110-7" />
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:5.26;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3153"
+       width="252.45682"
+       height="71.028236"
+       x="380.20016"
+       y="773.99097"
+       ry="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3929"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(54.285714,312.55341)"><flowRegion
+         id="flowRegion3931"><rect
+           id="rect3933"
+           width="247.14285"
+           height="64.285713"
+           x="380"
+           y="468.38019" /></flowRegion><flowPara
+         id="flowPara3935">Sistem</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 504.28572,438.3802 0,25.71428"
+       id="path3937"
+       transform="translate(0,308.2677)" />
+  </g>
+</svg>
