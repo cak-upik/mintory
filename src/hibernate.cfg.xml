@@ -6,28 +6,27 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/papermandb</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mintory</property>
     <property name="hibernate.connection.username">root</property>
     <!--<property name="cache.provider_class">
             org.hibernate.cache.EhCacheProvider
     </property>
     <property name="cache.use_second_level_cache">true</property>-->
     <!-- Mapping Table To Database -->
-    <mapping class="paperman.model.kendaraan"/>
-    <mapping class="paperman.model.pengemudi"/>
-    <mapping class="paperman.model.kendaraanPutih"/>
-    <mapping class="paperman.model.pengemudiPutih"/>
-    <mapping class="paperman.model.setoran"/>
-    <mapping class="paperman.model.setoranDetail"/>
-    <mapping class="paperman.model.setoranPutih"/>
-    <mapping class="paperman.model.setoranDetailPutih"/>
-    <mapping class="paperman.model.sistem"/>
-    <mapping class="paperman.model.codeGenerator"/>
-    <mapping class="paperman.model.closingBulanan"/>
-    <mapping class="paperman.model.closingTahunan"/>
-    <mapping class="paperman.model.komposisiSetoran"/>
-    <mapping class="paperman.model.SecurityUser"/>
-    <mapping class="paperman.model.closingBulananPutih"/>
-    <mapping class="paperman.model.closingTahunanPutih"/>
+    <mapping class="mintory.model.Barang"/>
+    <mapping class="mintory.model.Pengemudi"/>
+    <mapping class="mintory.model.Supplier"/>
+<!--    <mapping class="mintory.model.setoran"/>
+    <mapping class="mintory.model.setoranDetail"/>
+    <mapping class="mintory.model.setoranPutih"/>
+    <mapping class="mintory.model.setoranDetailPutih"/>-->
+    <mapping class="mintory.model.sistem"/>
+    <mapping class="mintory.model.codeGenerator"/>
+    <mapping class="mintory.model.closingBulanan"/>
+    <mapping class="mintory.model.closingTahunan"/>
+    <mapping class="mintory.model.komposisiSetoran"/>
+    <mapping class="mintory.model.SecurityUser"/>
+    <mapping class="mintory.model.closingBulananPutih"/>
+    <mapping class="mintory.model.closingTahunanPutih"/>
   </session-factory>
 </hibernate-configuration>

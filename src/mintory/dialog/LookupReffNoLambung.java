@@ -13,7 +13,7 @@ package mintory.dialog;
 import java.util.ArrayList;
 import java.util.List;
 import mintory.Main;
-import mintory.model.kendaraan;
+import mintory.model.Barang;
 import mintory.model.setoranDetail;
 import mintory.tablemodel.LookupReffNoLambungTableModel;
 

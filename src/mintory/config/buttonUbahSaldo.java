@@ -75,13 +75,13 @@ public class buttonUbahSaldo extends javax.swing.JPanel {
         btnKeluar = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/save.png"))); // NOI18N
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/save.png"))); // NOI18N
         btnSimpan.setText("Simpan  F3");
 
-        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/dekstop.png"))); // NOI18N
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/exits.png"))); // NOI18N
         btnKeluar.setText("Keluar  F6");
 
-        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/stop.png"))); // NOI18N
+        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/quit.png"))); // NOI18N
         btnBatal.setText("Batal  F5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

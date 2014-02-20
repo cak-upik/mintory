@@ -31,11 +31,11 @@ public class setoranDetail implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="id_kendaraan", nullable=false)
-    private kendaraan kend;
+    private Barang kend;
 
     @ManyToOne
     @JoinColumn(name="id_pengemudi", nullable=false)
-    private pengemudi kemudi;
+    private Supplier kemudi;
 
     @Column(name="angsuran")
     private BigDecimal angsuran = BigDecimal.ZERO;
@@ -98,19 +98,19 @@ public class setoranDetail implements Serializable {
         this.kasbon = kasbon;
     }
 
-    public pengemudi getKemudi() {
+    public Supplier getKemudi() {
         return kemudi;
     }
 
-    public void setKemudi(pengemudi kemudi) {
+    public void setKemudi(Supplier kemudi) {
         this.kemudi = kemudi;
     }
 
-    public kendaraan getKend() {
+    public Barang getKend() {
         return kend;
     }
 
-    public void setKend(kendaraan kend) {
+    public void setKend(Barang kend) {
         this.kend = kend;
     }
 

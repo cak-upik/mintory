@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
-    <context:component-scan base-package="paperman"/>
+    <context:component-scan base-package="mintory"/>
     <context:annotation-config/>
     <tx:annotation-driven/>
 

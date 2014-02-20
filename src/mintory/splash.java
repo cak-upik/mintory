@@ -22,7 +22,7 @@ public class splash extends JWindow implements Runnable {
 
     public void run() {
         JPanel pnl = new JPanel();
-        ImageIcon srcImages = new ImageIcon(getClass().getResource("/paperman/images/splash.png"));
+        ImageIcon srcImages = new ImageIcon(getClass().getResource("/mintory/images/splash.png"));
         final JProgressBar pb_1 = new JProgressBar();
         final JLabel lbl_a = new JLabel("");
 //        final JLabel lbl_b = new JLabel("");

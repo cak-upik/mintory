@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.6" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
-    <Property name="resizable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Data Pengemudi - Armada Putih"/>
+    <Property name="title" type="java.lang.String" value="Master Data Supplier"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -25,14 +24,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSplitPane1" alignment="1" pref="1096" max="32767" attributes="0"/>
+          <Component id="jSplitPane1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jSplitPane1" pref="581" max="32767" attributes="0"/>
+              <Component id="jSplitPane1" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,7 +47,8 @@
       <SubComponents>
         <Container class="javax.swing.JSplitPane" name="jSplitPane2">
           <Properties>
-            <Property name="dividerLocation" type="int" value="450"/>
+            <Property name="dividerLocation" type="int" value="375"/>
+            <Property name="dividerSize" type="int" value="5"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -61,6 +61,7 @@
             <Container class="javax.swing.JSplitPane" name="jSplitPane3">
               <Properties>
                 <Property name="dividerLocation" type="int" value="-5"/>
+                <Property name="dividerSize" type="int" value="10"/>
                 <Property name="orientation" type="int" value="0"/>
               </Properties>
               <Constraints>
@@ -96,8 +97,11 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbKriteria" min="-2" pref="110" max="-2" attributes="1"/>
-                                  <Component id="txtCariPengemudi" pref="312" max="32767" attributes="1"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="cmbKriteria" min="-2" pref="134" max="-2" attributes="1"/>
+                                      <EmptySpace min="0" pref="132" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtCariSupplier" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -111,7 +115,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCariPengemudi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCariSupplier" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -126,7 +130,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Cari Pengemudi"/>
+                        <Property name="text" type="java.lang.String" value="Cari Supplier"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -134,17 +138,17 @@
                         <Property name="text" type="java.lang.String" value="Kriteria"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtCariPengemudi">
+                    <Component class="javax.swing.JTextField" name="txtCariSupplier">
                       <Events>
-                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCariPengemudiKeyReleased"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCariSupplierKeyReleased"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="cmbKriteria">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="2">
-                            <StringItem index="0" value="NRP"/>
-                            <StringItem index="1" value="NAMA"/>
+                            <StringItem index="0" value="Kode"/>
+                            <StringItem index="1" value="Nama"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -152,16 +156,29 @@
                     <Container class="javax.swing.JPanel" name="jPanel5">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="ff" green="48" red="0" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
+                            <CompoundBorder>
+                              <Border PropertyName="outside" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                                <BevelBorder/>
+                              </Border>
+                              <Border PropertyName="inside" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                                <BevelBorder/>
+                              </Border>
+                            </CompoundBorder>
+                          </Border>
                         </Property>
                       </Properties>
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="263" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -175,9 +192,12 @@
                         <Component class="javax.swing.JLabel" name="jLabel11">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="BPG Chveulebrivi" size="13" style="1"/>
+                              <Font name="BPG Chveulebrivi" size="16" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Pencarian Data Pengemudi"/>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Pencarian Data Supplier"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -204,33 +224,19 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtNama" alignment="0" min="-2" pref="311" max="-2" attributes="2"/>
-                                  <Component id="txtAlamat" alignment="0" pref="318" max="32767" attributes="2"/>
-                                  <Component id="txtKota" alignment="0" pref="318" max="32767" attributes="2"/>
-                                  <Component id="tglMasuk" linkSize="1" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="spinHari" min="-2" pref="95" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="spinBulan" min="-2" pref="52" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtRefNoLambung" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                                  <Component id="txtNRP" linkSize="1" alignment="0" min="-2" pref="167" max="-2" attributes="1"/>
+                                  <Component id="txtAlamat" linkSize="2" alignment="0" min="-2" pref="236" max="-2" attributes="1"/>
+                                  <Component id="txtKodeSupplier" linkSize="1" min="-2" pref="132" max="-2" attributes="1"/>
+                                  <Component id="txtNoTelp" linkSize="1" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                  <Component id="txtNamaSupplier" linkSize="2" alignment="0" min="-2" pref="236" max="-2" attributes="1"/>
                               </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -241,17 +247,12 @@
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtRefNoLambung" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtNRP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKodeSupplier" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtNama" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaSupplier" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -261,118 +262,45 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKota" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel10" alignment="3" min="-2" pref="25" max="-2" attributes="1"/>
+                                  <Component id="txtNoTelp" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel7" max="32767" attributes="1"/>
-                                  <Component id="tglMasuk" alignment="0" max="32767" attributes="1"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="spinHari" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinBulan" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="166" max="32767" attributes="0"/>
+                              <EmptySpace pref="213" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLabel3">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="NRP"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtNRP">
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNRPMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtNama">
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNamaMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel4">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Nama"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtAlamat">
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtAlamatMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel5">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Alamat"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="txtKota">
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtKotaMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel6">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Kota"/>
-                      </Properties>
-                    </Component>
-                    <Component class="com.toedter.calendar.JDateChooser" name="tglMasuk">
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel7">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Tgl Masuk"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel8">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Masa Kontrak"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSpinner" name="spinHari">
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel10">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Hari"/>
-                      </Properties>
-                    </Component>
                     <Container class="javax.swing.JPanel" name="jPanel4">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="ff" green="49" red="0" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
+                            <CompoundBorder>
+                              <Border PropertyName="inside" info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
+                                <CompoundBorder>
+                                  <Border PropertyName="outside" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                                    <BevelBorder/>
+                                  </Border>
+                                  <Border PropertyName="inside" info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                                    <BevelBorder/>
+                                  </Border>
+                                </CompoundBorder>
+                              </Border>
+                            </CompoundBorder>
+                          </Border>
                         </Property>
                       </Properties>
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="294" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -386,33 +314,66 @@
                         <Component class="javax.swing.JLabel" name="jLabel12">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="BPG Chveulebrivi" size="13" style="1"/>
+                              <Font name="BPG Chveulebrivi" size="16" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Input Data Pengemudi"/>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Input Data Supplier"/>
                           </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabel9">
+                    <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="BPG Chveulebrivi" size="13" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="No Lambung"/>
+                        <Property name="text" type="java.lang.String" value="Kode Supplier"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtRefNoLambung">
+                    <Component class="javax.swing.JTextField" name="txtKodeSupplier">
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtRefNoLambungMouseClicked"/>
-                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRefNoLambungKeyReleased"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtKodeSupplierMouseClicked"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JSpinner" name="spinBulan">
+                    <Component class="javax.swing.JTextField" name="txtNamaSupplier">
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNamaSupplierMouseClicked"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNamaSupplierKeyReleased"/>
+                      </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel13">
+                    <Component class="javax.swing.JLabel" name="jLabel4">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Bulan"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Nama Supplier"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtAlamat">
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtAlamatMouseClicked"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAlamatKeyReleased"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel5">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Alamat"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel10">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="BPG Chveulebrivi" size="13" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="No. Telepon"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtNoTelp">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -420,70 +381,44 @@
             </Container>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
               <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                    <EtchetBorder bevelType="0"/>
-                  </Border>
-                </Property>
+                <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
+                <Property name="verticalScrollBarPolicy" type="int" value="22"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-                  <JSplitPaneConstraints position="right"/>
+                  <JSplitPaneConstraints position="bottom"/>
                 </Constraint>
               </Constraints>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblPengemudi">
+                <Component class="javax.swing.JTable" name="tblSupplier">
                   <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                        <EmptyBorder/>
-                      </Border>
-                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="0">
-                        <Column editable="true" title="  Lambung" type="java.lang.Object"/>
-                        <Column editable="true" title="  NRP" type="java.lang.Object"/>
-                        <Column editable="true" title="  Nama" type="java.lang.Object"/>
+                      <Table columnCount="4" rowCount="0">
+                        <Column editable="true" title="  Kode Supplier" type="java.lang.Object"/>
+                        <Column editable="true" title="  Nama Supplier" type="java.lang.Object"/>
                         <Column editable="true" title="  Alamat" type="java.lang.Object"/>
-                        <Column editable="true" title="  Kota" type="java.lang.Object"/>
-                        <Column editable="true" title="  Tgl Masuk" type="java.lang.Object"/>
-                        <Column editable="true" title="  Masa Kontrak" type="java.lang.Object"/>
+                        <Column editable="true" title="  No.Telepon" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="autoResizeMode" type="int" value="0"/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="80" minWidth="80" prefWidth="-1" resizable="true">
+                        <Column maxWidth="200" minWidth="150" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="150" minWidth="150" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="250" minWidth="250" prefWidth="-1" resizable="true">
+                        <Column maxWidth="300" minWidth="250" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="250" minWidth="250" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="100" minWidth="100" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="150" minWidth="100" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -494,6 +429,9 @@
                           <Renderer/>
                         </Column>
                       </TableColumnModel>
+                    </Property>
+                    <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                      <JTableSelectionModel selectionMode="0"/>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -507,8 +445,8 @@
         <Component class="mintory.master.buttonMaster" name="buttonMaster">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-                <BevelBorder/>
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder bevelType="0"/>
               </Border>
             </Property>
           </Properties>

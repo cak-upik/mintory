@@ -36,7 +36,7 @@ public class setoranDetailPutih implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="id_pengemudi_pth", nullable=false)
-    private pengemudiPutih kemudiPutih;
+    private Pengemudi kemudiPutih;
 
     @Column(name="angsuran")
     private BigDecimal angsuran = BigDecimal.ZERO;
@@ -99,11 +99,11 @@ public class setoranDetailPutih implements Serializable {
         this.kasbon = kasbon;
     }
 
-    public pengemudiPutih getKemudiPutih() {
+    public Pengemudi getKemudiPutih() {
         return kemudiPutih;
     }
 
-    public void setKemudiPutih(pengemudiPutih kemudiPutih) {
+    public void setKemudiPutih(Pengemudi kemudiPutih) {
         this.kemudiPutih = kemudiPutih;
     }
 

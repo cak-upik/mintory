@@ -16,7 +16,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="jLabel1" min="-2" pref="102" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Component id="btnTambah" linkSize="1" min="-2" pref="129" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnUbah" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -28,18 +30,22 @@
               <Component id="btnBatal" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnKeluar" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="101" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="103" alignment="0" groupAlignment="2" attributes="0">
+          <Group type="103" alignment="0" groupAlignment="2" max="-2" attributes="0">
               <Component id="btnTambah" linkSize="2" alignment="2" min="-2" pref="43" max="-2" attributes="0"/>
-              <Component id="btnUbah" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnUbah" linkSize="2" alignment="1" min="-2" max="-2" attributes="0"/>
               <Component id="btnSimpan" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
               <Component id="btnHapus" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
               <Component id="btnBatal" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
-              <Component id="btnKeluar" linkSize="2" alignment="2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnKeluar" linkSize="2" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel1" linkSize="6" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
+              <Component id="jLabel2" linkSize="6" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,50 +53,82 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnTambah">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="12" style="1"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/paperman/images/new.png"/>
+          <Image iconType="3" name="/mintory/images/new.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Tambah F1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnUbah">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="12" style="1"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/paperman/images/edit.png"/>
+          <Image iconType="3" name="/mintory/images/edit.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ubah   F2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSimpan">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="12" style="1"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/paperman/images/save.png"/>
+          <Image iconType="3" name="/mintory/images/save.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Simpan  F3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnKeluar">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="12" style="1"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/paperman/images/dekstop.png"/>
+          <Image iconType="3" name="/mintory/images/exits.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Keluar  F6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnHapus">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="12" style="1"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/paperman/images/deletes.png"/>
+          <Image iconType="3" name="/mintory/images/deletes.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Hapus  F4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnBatal">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="DejaVu Sans" size="12" style="1"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/paperman/images/stop.png"/>
+          <Image iconType="3" name="/mintory/images/quit.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Batal  F5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mintory/images/blue-white-striped-arrow.png"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mintory/images/blue-white-striped-arrow-flipped.png"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

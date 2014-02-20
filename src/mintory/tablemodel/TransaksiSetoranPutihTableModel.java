@@ -44,7 +44,7 @@ public class TransaksiSetoranPutihTableModel extends AbstractTableModel{
         switch(column) {
             case 0 : return std.getSetor_map_putih().getKode();
             case 1 : return std.getSetor_map_putih().getCounter_setoran();
-            case 2 : return std.getKemudiPutih().getKendPutih().getNoLambung();
+//            case 2 : return std.getKemudiPutih().getKendPutih().getNoLambung();
             case 3 : return std.getSetor_map_putih().getTglJatuhTempo();
             case 4 : return std.getSetor_map_putih().getTglSPO();
             case 5 : return totalFormatter.format(std.getSetor_map_putih().getTotalSetoran());

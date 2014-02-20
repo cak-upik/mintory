@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author artivisi
  */
-public class PapermanFocusComponentUtils extends FocusTraversalPolicy {
+public class MintoryFocusComponentUtils extends FocusTraversalPolicy {
 
     private List<Component> componentList = new ArrayList<Component>();
 
-    public PapermanFocusComponentUtils(List<Component> componentList) {
+    public MintoryFocusComponentUtils(List<Component> componentList) {
         this.componentList.addAll(componentList);
     }
 

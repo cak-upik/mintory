@@ -9,14 +9,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import mintory.dao.MasterKendaraanDao;
+import mintory.dao.MasterBarangDao;
 import mintory.dao.MasterKendaraanPutihDao;
+import mintory.dao.MasterSupplierDao;
 import mintory.dao.MasterPengemudiDao;
-import mintory.dao.MasterPengemudiPutihDao;
-import mintory.model.kendaraan;
+import mintory.model.Barang;
 import mintory.model.kendaraanPutih;
-import mintory.model.pengemudi;
-import mintory.model.pengemudiPutih;
+import mintory.model.Supplier;
+import mintory.model.Pengemudi;
 import mintory.service.MasterService;
 
 /**
@@ -26,70 +26,53 @@ import mintory.service.MasterService;
 @Service("masterService")
 @Transactional
 public class MasterServiceImpl implements MasterService{
-    @Autowired private MasterKendaraanDao mkDao;
-    @Autowired private MasterPengemudiDao pgDao;
-    @Autowired private MasterKendaraanPutihDao mkPutihDao;
-    @Autowired private MasterPengemudiPutihDao pgPutihDao;
+    @Autowired private MasterBarangDao mstBrgDao;
+    @Autowired private MasterSupplierDao supplyDao;
+    @Autowired private MasterPengemudiDao kemudiDao;
 
     @Autowired
-    public void setDao(MasterKendaraanDao mkDao, MasterPengemudiDao pgDao) {
-        this.mkDao = mkDao;
-        this.pgDao = pgDao;
+    public void setDao(MasterBarangDao mstBrgDao, MasterSupplierDao suppDao) {
+        this.mstBrgDao = mstBrgDao;
+        this.supplyDao = suppDao;
     }
 
-    public void save(kendaraan kend) {
-        mkDao.save(kend);
+    public void save(Barang brg) {
+        mstBrgDao.save(brg);
     }
 
-    public void delete(kendaraan kend) {
-        mkDao.delete(kend);
+    public void delete(Barang brg) {
+        mstBrgDao.delete(brg);
     }
 
-    public List<kendaraan> kendaraanRecord() {
-        return mkDao.semuaData();
+    public List<Barang> barangRecord() {
+        return mstBrgDao.semuaData();
     }
 
-    public void save(pengemudi kemudi) {
-        pgDao.save(kemudi);
+    public void save(Supplier supply) {
+        supplyDao.save(supply);
     }
 
-    public void delete(pengemudi kemudi) {
-        pgDao.delete(kemudi);
+    public void delete(Supplier supply) {
+        supplyDao.delete(supply);
     }
 
-    public List<pengemudi> kemudiRecord() {
-        return pgDao.semuaData();
+    public List<Supplier> supplierRecord() {
+        return supplyDao.semuaData();
     }
 
-    public void save(kendaraanPutih kendPutih) {
-        mkPutihDao.save(kendPutih);
+    public void save(Pengemudi kemudi) {
+        kemudiDao.save(kemudi);
     }
 
-    public void delete(kendaraanPutih kendPutih) {
-        mkPutihDao.delete(kendPutih);
+    public void delete(Pengemudi kemudi) {
+        kemudiDao.delete(kemudi);
     }
 
-    public List<kendaraanPutih> kendaraanPutihRecord() {
-        return mkPutihDao.semuaData();
+    public List<Pengemudi> kemudiRecord() {
+        return kemudiDao.semuaData();
     }
 
-    public void save(pengemudiPutih kemudiPutih) {
-        pgPutihDao.save(kemudiPutih);
-    }
-
-    public void delete(pengemudiPutih kemudPutih) {
-        pgPutihDao.delete(kemudPutih);
-    }
-
-    public List<pengemudiPutih> kemudiPutihRecord() {
-        return pgPutihDao.semuaData();
-    }
-
-    public List<kendaraan> findKendaraanByLambung(Integer lambung) {
-        return mkDao.findKendaraanByLambung(lambung);
-    }
-
-    public List<kendaraanPutih> findKendaraanPutihByLambung(Integer lambung) {
-        return mkPutihDao.findKendaraanByLambung(lambung);
+    public List<Barang> findByKodeBarang(String kode) {
+        return mstBrgDao.findByKodeBarang(kode);
     }
 }

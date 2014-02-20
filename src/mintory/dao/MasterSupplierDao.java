@@ -7,16 +7,16 @@ package mintory.dao;
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import mintory.model.Pengemudi;
+import mintory.model.Supplier;
 
 /**
  *
  * @author i1440ns
  */
 @Repository
-public class MasterPengemudiDao extends BaseDaoHibernate<Pengemudi>{
-    public List<Pengemudi> semuaData() {
-        return sessionFactory.getCurrentSession().createQuery("from Pengemudi order by nrp").list();
+public class MasterSupplierDao extends BaseDaoHibernate<Supplier>{
+    public List<Supplier> semuaData() {
+        return sessionFactory.getCurrentSession().createQuery("from Supplier order by kodeSupplier").list();
     }
 
 }

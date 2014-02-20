@@ -52,7 +52,7 @@ import org.joda.time.DateTime;
 import org.springframework.transaction.TransactionException;
 import mintory.Main;
 import mintory.OsUtils;
-import mintory.PapermanFocusComponentUtils;
+import mintory.MintoryFocusComponentUtils;
 import mintory.TextComponentUtils;
 import mintory.dialog.OpenClosedTrans;
 import mintory.dialog.PilihKomposisi;
@@ -63,9 +63,9 @@ import mintory.model.closingBulanan;
 import mintory.model.codeGenerator;
 import mintory.model.isClosedFor;
 import mintory.model.isClosedStatus;
-import mintory.model.kendaraan;
+import mintory.model.Barang;
 import mintory.model.komposisiSetoran;
-import mintory.model.pengemudi;
+import mintory.model.Supplier;
 import mintory.model.setoran;
 import mintory.model.setoranDetail;
 import mintory.model.sistem;
@@ -82,13 +82,13 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
     private List<setoran> listSetoranForUpdate = new ArrayList<setoran>();
     private List<setoranDetail> listSetoranDetail = new ArrayList<setoranDetail>();
     private List<setoranDetail> ListStoDetail = new ArrayList<setoranDetail>();
-    private List<kendaraan> listKendaraan = new ArrayList<kendaraan>();
-    private List<pengemudi> listPengemudi = new ArrayList<pengemudi>();
+    private List<Barang> listKendaraan = new ArrayList<Barang>();
+    private List<Supplier> listSupplier = new ArrayList<Supplier>();
     private List<sistem> listSistem;
     private List<closingBulanan> listClosingBulananSaldoAwal;
     private closingBulanan refNoLambung;
-    private kendaraan kend;
-    private pengemudi drive;
+    private Barang kend;
+    private Supplier supply;
     private sistem sys;
     private setoran sto;
     private setoranDetail stoDet;
@@ -143,6 +143,7 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
 
     /** Creates new form TransaksiSetoran */
     public TransaksiSetoran() {
+        this.listSupplier = new ArrayList<Supplier>();
         initComponents();
         initButtonListener();
         initButtonHotkeyFunction();
@@ -180,7 +181,7 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
                 isBonusHooray = false;
             }
         }
-        listPengemudi = Main.getMasterService().kemudiRecord();
+        listSupplier = Main.getMasterService().supplierRecord();
 //        listClosingBulananSaldoAwal = Main.getTransaksiService().closingBulananRecordForSaldoAwal(aksiClosing.DO_CLOSING_SALDO_AWAL);
         listClosingBulananSaldoAwal = Main.getTransaksiService().closingBulananRecordForSaldoAwal(komposisisetoran, sys.getTglKerja());
         if (!listClosingBulananSaldoAwal.isEmpty()) {
@@ -228,7 +229,7 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
         listComponentActive.add(txtBayarKasbon);
         listComponentActive.add(txtOvertime);
         listComponentActive.add(txtCicilan);
-        this.setFocusTraversalPolicy(new PapermanFocusComponentUtils(listComponentActive));
+        this.setFocusTraversalPolicy(new MintoryFocusComponentUtils(listComponentActive));
     }
 
     private void initButtonHotkeyFunction() {
@@ -431,11 +432,11 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
 
     private void aksiUbah() {
         listClosingBulananSaldoAwal = Main.getTransaksiService().closingBulananRecordForSaldoAwal(komposisisetoran, sys.getTglKerja());
-        listSetoranForUpdate = Main.getTransaksiService().getUpdatedSetoranInRange(stoDet.getKemudi().getKend().getNoLambung(), sto.getTglSPO(), Main.getTransaksiService().getLatestSetoranCount(stoDet.getKemudi().getKend().getNoLambung()).get(0).getSetor_map().getTglSPO());
-        System.out.println("listSetoranForUpdate size = " + listSetoranForUpdate.size());
-        System.out.println("getLatestSetoranCount= " + Main.getTransaksiService().getLatestSetoranCount(stoDet.getKemudi().getKend().getNoLambung()).get(0).getKemudi().getKend().getNoLambung());
-        System.out.println("getLatestSetoranCount dateAwal= " + sto.getTglSPO());
-        System.out.println("getLatestSetoranCount dateAkhir= " + Main.getTransaksiService().getLatestSetoranCount(stoDet.getKemudi().getKend().getNoLambung()).get(0).getSetor_map().getTglSPO());
+//        listSetoranForUpdate = Main.getTransaksiService().getUpdatedSetoranInRange(stoDet.getKemudi().getKend().getNoLambung(), sto.getTglSPO(), Main.getTransaksiService().getLatestSetoranCount(stoDet.getKemudi().getKend().getNoLambung()).get(0).getSetor_map().getTglSPO());
+//        System.out.println("listSetoranForUpdate size = " + listSetoranForUpdate.size());
+//        System.out.println("getLatestSetoranCount= " + Main.getTransaksiService().getLatestSetoranCount(stoDet.getKemudi().getKend().getNoLambung()).get(0).getKemudi().getKend().getNoLambung());
+//        System.out.println("getLatestSetoranCount dateAwal= " + sto.getTglSPO());
+//        System.out.println("getLatestSetoranCount dateAkhir= " + Main.getTransaksiService().getLatestSetoranCount(stoDet.getKemudi().getKend().getNoLambung()).get(0).getSetor_map().getTglSPO());
         enableForm(true);
         enableSearchEngine(false);
 //        setoranPrevious = Integer.parseInt(txtSetoranCounter.getText());
@@ -452,69 +453,69 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
     private void aksiHapus() {
 //        setoranPrevious = Integer.parseInt(txtSetoranCounter.getText());
 //        System.out.println("stp = " + setoranPrevious);
-        String noLambung = stoDet.getKend().getNoLambung().toString();
-        String nrp = stoDet.getKemudi().getNrp();
-        String nama = stoDet.getKemudi().getNama();
-        String setoranCount = sto.getCounter_setoran().toString();
-        String jatuhTempo = sto.getTglJatuhTempo().toString();
-        String tglSPO = sto.getTglSPO().toString();
-        String kodeSetoran = sto.getKode();
-        String angsuran = stoDet.getAngsuran().toString();
-        String tabungan = stoDet.getTabungan().toString();
-        String kasbon = stoDet.getKasbon().toString();
-        String bayarKasbon = stoDet.getBayar().toString();
-        String overtime = stoDet.getOvtime().toString();
-        String cicilan = stoDet.getKS().toString();
-        int konfirmasi = JOptionPane.showConfirmDialog(this,
-                "Anda Yakin Akan Menghapus Data Ini ? ?\n"
-                + "Rincian :\n"
-                + "Kode Setoran = " + kodeSetoran + "\n"
-                + "No.Lambung = " + noLambung + "\n"
-                + "NRP =  " + nrp + "\n"
-                + "Nama = " + nama + "\n"
-                + "Setoran Ke = " + setoranCount + "\n"
-                + "Tgl. Jatuh Tempo =  " + jatuhTempo + "\n"
-                + "Tgl. SPO = " + tglSPO + "\n"
-                + "Angsuran = " + angsuran + "\n"
-                + "Tabungan = " + tabungan + "\n"
-                + "Kasbon = " + kasbon + "\n"
-                + "Bayar Kasbon = " + bayarKasbon + "\n"
-                + "Over Time= " + overtime + "\n"
-                + "Cicilan= " + cicilan,
-                "Konfirmasi Hapus Data", option, JOptionPane.QUESTION_MESSAGE);
-        if (konfirmasi == JOptionPane.OK_OPTION) {
-            setoranCounter = new Integer(txtNoLambung.getText());
-            Main.getTransaksiService().delete(sto);
-            LoadDatabaseToTable();
-            houseKeeping();
-            List<setoranDetail> listStoDet = Main.getTransaksiService().getLatestSetoranCount(setoranCounter);
-            if (listStoDet.isEmpty()) {
-                setoranCounter = 0;
-            } else {
-                if (listStoDet.get(0).getSetor_map().getTotalHutang().compareTo(BigDecimal.ZERO) != 0) {
-                    setoran st = listStoDet.get(0).getSetor_map();
-                    st.setPayedStatus(TransaksiStatus.U);
-                    Main.getTransaksiService().save(st);
-                }
-                setoranCounter = listStoDet.get(0).getSetor_map().getCounter_setoran();
-            }
-            sto = null;
-            stoDet = null;
-            listSetoran = null;
-            listStoDet = null;
-        }
-        if (konfirmasi == JOptionPane.CANCEL_OPTION) {
-            houseKeeping();
-            sto = null;
-            stoDet = null;
-            listSetoran = null;
-        }
-        enableForm(false);
-        enableSearchEngine(true);
-        houseKeeping();
-        tblSetoran.getSelectionModel().clearSelection();
-        tblSetoran.setEnabled(true);
-        toolbarButtonTransaksi.defaultMode();
+//        String noLambung = stoDet.getKend().getNoLambung().toString();
+//        String nrp = stoDet.getKemudi().getNrp();
+//        String nama = stoDet.getKemudi().getNama();
+//        String setoranCount = sto.getCounter_setoran().toString();
+//        String jatuhTempo = sto.getTglJatuhTempo().toString();
+//        String tglSPO = sto.getTglSPO().toString();
+//        String kodeSetoran = sto.getKode();
+//        String angsuran = stoDet.getAngsuran().toString();
+//        String tabungan = stoDet.getTabungan().toString();
+//        String kasbon = stoDet.getKasbon().toString();
+//        String bayarKasbon = stoDet.getBayar().toString();
+//        String overtime = stoDet.getOvtime().toString();
+//        String cicilan = stoDet.getKS().toString();
+//        int konfirmasi = JOptionPane.showConfirmDialog(this,
+//                "Anda Yakin Akan Menghapus Data Ini ? ?\n"
+//                + "Rincian :\n"
+//                + "Kode Setoran = " + kodeSetoran + "\n"
+////                + "No.Lambung = " + noLambung + "\n"
+//                + "NRP =  " + nrp + "\n"
+//                + "Nama = " + nama + "\n"
+//                + "Setoran Ke = " + setoranCount + "\n"
+//                + "Tgl. Jatuh Tempo =  " + jatuhTempo + "\n"
+//                + "Tgl. SPO = " + tglSPO + "\n"
+//                + "Angsuran = " + angsuran + "\n"
+//                + "Tabungan = " + tabungan + "\n"
+//                + "Kasbon = " + kasbon + "\n"
+//                + "Bayar Kasbon = " + bayarKasbon + "\n"
+//                + "Over Time= " + overtime + "\n"
+//                + "Cicilan= " + cicilan,
+//                "Konfirmasi Hapus Data", option, JOptionPane.QUESTION_MESSAGE);
+//        if (konfirmasi == JOptionPane.OK_OPTION) {
+//            setoranCounter = new Integer(txtNoLambung.getText());
+//            Main.getTransaksiService().delete(sto);
+//            LoadDatabaseToTable();
+//            houseKeeping();
+//            List<setoranDetail> listStoDet = Main.getTransaksiService().getLatestSetoranCount(setoranCounter);
+//            if (listStoDet.isEmpty()) {
+//                setoranCounter = 0;
+//            } else {
+//                if (listStoDet.get(0).getSetor_map().getTotalHutang().compareTo(BigDecimal.ZERO) != 0) {
+//                    setoran st = listStoDet.get(0).getSetor_map();
+//                    st.setPayedStatus(TransaksiStatus.U);
+//                    Main.getTransaksiService().save(st);
+//                }
+//                setoranCounter = listStoDet.get(0).getSetor_map().getCounter_setoran();
+//            }
+//            sto = null;
+//            stoDet = null;
+//            listSetoran = null;
+//            listStoDet = null;
+//        }
+//        if (konfirmasi == JOptionPane.CANCEL_OPTION) {
+//            houseKeeping();
+//            sto = null;
+//            stoDet = null;
+//            listSetoran = null;
+//        }
+//        enableForm(false);
+//        enableSearchEngine(true);
+//        houseKeeping();
+//        tblSetoran.getSelectionModel().clearSelection();
+//        tblSetoran.setEnabled(true);
+//        toolbarButtonTransaksi.defaultMode();
     }
 
     private void aksiSimpan() {
@@ -843,7 +844,7 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
         sto.setTotalSetoran(TextComponentUtils.parseNumberToBigDecimal(lblNominal.getText().substring(3)));
         sto.setIdKomposisi(komposisisetoran);
         sto.setUser(sys.getLastLoginUser().getNamaLogin());
-        stoDet.setKemudi(drive);
+//        stoDet.setKemudi(drive);
         stoDet.setKend(kend);
         stoDet.setAngsuran(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText()));
         stoDet.setTabungan(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
@@ -917,39 +918,39 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
     }
 
     private void LoadDatabaseToForm() {
-        kend.setId(stoDet.getKemudi().getKend().getId());
-        drive.setId(stoDet.getKemudi().getId());
-        txtNoLambung.setText(stoDet.getKemudi().getKend().getNoLambung().toString());
-        txtNRP.setText(stoDet.getKemudi().getNrp());
-        txtNama.setText(stoDet.getKemudi().getNama());
-        txtSetoranCounter.setText(stoDet.getSetor_map().getCounter_setoran().toString());
-        dateJatuhTempo.setDate(stoDet.getSetor_map().getTglJatuhTempo());
-        dateSPO.setDate(stoDet.getSetor_map().getTglSPO());
-        txtKeterangan.setText(stoDet.getKet());
-        txtKodeSetoran.setText(stoDet.getSetor_map().getKode());
-        txtAngsuran.setText(TextComponentUtils.formatNumber(stoDet.getAngsuran()));
-        txtTabungan.setText(TextComponentUtils.formatNumber(stoDet.getTabungan()));
-        txtKasbon.setText(TextComponentUtils.formatNumber(stoDet.getKasbon()));
-        txtBayarKasbon.setText(TextComponentUtils.formatNumber(stoDet.getBayar()));
-        txtOvertime.setText(TextComponentUtils.formatNumber(stoDet.getOvtime()));
-        txtCicilan.setText(TextComponentUtils.formatNumber(stoDet.getKS()));
-        lblNominal.setText(rupiahFormatter.format(stoDet.getSetor_map().getTotalSetoran()));
-        lblHutang.setText(rupiahFormatter.format(stoDet.getSetor_map().getTotalHutang()));
-        lblJalanStatus.setVisible(true);
-        lblJalanStatus.setEnabled(false);
-        if (stoDet.getSetor_map().getJalanStatus() == JalanStatus.J) {
-            checkJalanStatus.setVisible(true);
-            checkJalanStatus.setEnabled(false);
-            checkJalanStatus.setFont(new Font("BPG Chveulebrivi", Font.BOLD, 13));
-            checkJalanStatus.setText("Jalan");
-            checkJalanStatus.setSelected(true);
-        } else {
-            checkJalanStatus.setVisible(true);
-            checkJalanStatus.setEnabled(false);
-            checkJalanStatus.setFont(new Font("BPG Chveulebrivi", Font.PLAIN, 13));
-            checkJalanStatus.setText("Tidak/Rusak");
-            checkJalanStatus.setSelected(false);
-        }
+//        kend.setId(stoDet.getKemudi().getKend().getId());
+//        drive.setId(stoDet.getKemudi().getId());
+//        txtNoLambung.setText(stoDet.getKemudi().getKend().getNoLambung().toString());
+//        txtNRP.setText(stoDet.getKemudi().getNrp());
+//        txtNama.setText(stoDet.getKemudi().getNama());
+//        txtSetoranCounter.setText(stoDet.getSetor_map().getCounter_setoran().toString());
+//        dateJatuhTempo.setDate(stoDet.getSetor_map().getTglJatuhTempo());
+//        dateSPO.setDate(stoDet.getSetor_map().getTglSPO());
+//        txtKeterangan.setText(stoDet.getKet());
+//        txtKodeSetoran.setText(stoDet.getSetor_map().getKode());
+//        txtAngsuran.setText(TextComponentUtils.formatNumber(stoDet.getAngsuran()));
+//        txtTabungan.setText(TextComponentUtils.formatNumber(stoDet.getTabungan()));
+//        txtKasbon.setText(TextComponentUtils.formatNumber(stoDet.getKasbon()));
+//        txtBayarKasbon.setText(TextComponentUtils.formatNumber(stoDet.getBayar()));
+//        txtOvertime.setText(TextComponentUtils.formatNumber(stoDet.getOvtime()));
+//        txtCicilan.setText(TextComponentUtils.formatNumber(stoDet.getKS()));
+//        lblNominal.setText(rupiahFormatter.format(stoDet.getSetor_map().getTotalSetoran()));
+//        lblHutang.setText(rupiahFormatter.format(stoDet.getSetor_map().getTotalHutang()));
+//        lblJalanStatus.setVisible(true);
+//        lblJalanStatus.setEnabled(false);
+//        if (stoDet.getSetor_map().getJalanStatus() == JalanStatus.J) {
+//            checkJalanStatus.setVisible(true);
+//            checkJalanStatus.setEnabled(false);
+//            checkJalanStatus.setFont(new Font("BPG Chveulebrivi", Font.BOLD, 13));
+//            checkJalanStatus.setText("Jalan");
+//            checkJalanStatus.setSelected(true);
+//        } else {
+//            checkJalanStatus.setVisible(true);
+//            checkJalanStatus.setEnabled(false);
+//            checkJalanStatus.setFont(new Font("BPG Chveulebrivi", Font.PLAIN, 13));
+//            checkJalanStatus.setText("Tidak/Rusak");
+//            checkJalanStatus.setSelected(false);
+//        }
     }
 
     private void LoadDatabaseToTable() {
@@ -1024,17 +1025,16 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
     }
 
     public void valueChanged(ListSelectionEvent lse) {
-        if (tblSetoran.getSelectedRow() >= 0) {
-            stoDet = listSetoranDetail.get(tblSetoran.getSelectedRow());
-            sto = stoDet.getSetor_map();
-            kend = new kendaraan();
-            drive = new pengemudi();
-            genCode = Main.getSistemService().findBySpecific("SETORAN", "BIRU");
-            LoadDatabaseToForm();
-            toolbarButtonTransaksi.tableMode();
-            enableForm(false);
-            enableSearchEngine(true);
-        }
+//        if (tblSetoran.getSelectedRow() >= 0) {
+//            stoDet = listSetoranDetail.get(tblSetoran.getSelectedRow());
+//            sto = stoDet.getSetor_map();
+//            kend = new Barang();
+//            drive = new 
+//            LoadDatabaseToForm();
+//            toolbarButtonTransaksi.tableMode();
+//            enableForm(false);
+//            enableSearchEngine(true);
+//        }
     }
 
     private Integer totalPage(Integer limitSize) {
@@ -1720,534 +1720,534 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
 
     private void txtNoLambungKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoLambungKeyReleased
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyChar() == '\n') {
-            drive = new pengemudi();
-            kend = new kendaraan();
-            Date spo = new Date();
-            int i = 0;
-            int a = 0;
-            checkJalanStatus.setVisible(true);
-            checkJalanStatus.setEnabled(true);
-            lblJalanStatus.setVisible(true);
-            lblJalanStatus.setEnabled(true);
-            for (; i < listPengemudi.size(); i++) {
-                if (listPengemudi.get(i).getKend().getNoLambung().toString().startsWith(txtNoLambung.getText())) {
-                    txtNRP.setText(listPengemudi.get(i).getNrp());
-                    txtNama.setText(listPengemudi.get(i).getNama());
-                    txtKeterangan.setText(listPengemudi.get(i).getKend().getKeterangan());
-                    drive.setId(listPengemudi.get(i).getId());
-                    kend.setId(listPengemudi.get(i).getKend().getId());
-                    if (!listSetoran.isEmpty()) {
-                        if (Main.getSistemService().findBonusBulanan(komposisisetoran.getNamaKomposisi()) != null) {
-                            ListStoDetail = Main.getTransaksiService().findLastSetoranDetailByLambung(new Integer(txtNoLambung.getText()));
-                        } else {
-                            ListStoDetail = Main.getTransaksiService().findSetoranDetailByLambung(new Integer(txtNoLambung.getText()), Main.getTransaksiService().findLastSetoranDetailByLambung(new Integer(txtNoLambung.getText())).get(0).getSetor_map().getTglSPO());
-                        }
-                        System.out.println("Setoran Found = " + ListStoDetail.size());
-                        spo = Main.getTransaksiService().getLatestSetoranCount().get(0).getTglSPO();
-                        List<setoran> listSTO = Main.getTransaksiService().findLastTglJatuhTempo(JalanStatus.J);
-                        if (!listSTO.isEmpty()) {
-                            dateJatuhTempo.setDate(new DateTime(listSTO.get(0).getTglJatuhTempo().getTime()).plusDays(1).toDate());
-                            dateSPO.setDate(sys.getTglKerja());
-                        } else {
-                            if (listSetoran.isEmpty()) {
-                                dateJatuhTempo.setDate(listPengemudi.get(i).getKend().getTglJatuhTempo());
-                            } else {
-                                dateJatuhTempo.setDate(Main.getTransaksiService().findLastTglJatuhTempo(JalanStatus.M).get(0).getTglJatuhTempo());
-                            }
-                            dateSPO.setDate(sys.getTglKerja());
-                        }
-                    } else {
-                        dateJatuhTempo.setDate(listPengemudi.get(i).getKend().getTglJatuhTempo());
-                        dateSPO.setDate(sys.getTglKerja());
-                    }
-                    if (listClosingBulananSaldoAwal.isEmpty()) {
-                        if (!listSetoran.isEmpty()) {
-                            if (!ListStoDetail.isEmpty()) {
-                                setoranCounter = ListStoDetail.get(0).getSetor_map().getCounter_setoran();
-                                setoranCounter++;
-                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                            } else {
-                                setoranCounter = 1;
-                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                            }
-                        } else {
-                            setoranCounter = 1;
-                            txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                        }
-                    } else {
-                        for (; a < listClosingBulananSaldoAwal.size(); a++) {
-                            if (listClosingBulananSaldoAwal.get(a).getActClosing().equals(aksiClosing.DO_CLOSING_SALDO_AWAL)) {
-                                if (listClosingBulananSaldoAwal.get(a).getRefNoLambung().compareTo(new Integer(txtNoLambung.getText())) == 0) {
-                                    refNoLambung = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja());
-                                    if (refNoLambung != null) {
-                                        setoranCounter = refNoLambung.getRefSetoranKe();
-                                        setoranCounter++;
-                                        txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                                        break;
-                                    } else {
-                                        if (!listSetoran.isEmpty()) {
-                                            if (!ListStoDetail.isEmpty()) {
-                                                setoranCounter = ListStoDetail.get(0).getSetor_map().getCounter_setoran();
-                                                setoranCounter++;
-                                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                                            } else {
-                                                setoranCounter = 1;
-                                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                                            }
-                                        } else {
-                                            txtSetoranCounter.setText("1");
-                                        }
-                                        break;
-                                    }
-                                }
-                            } else {
-                                if (!listSetoran.isEmpty()) {
-                                    if (!ListStoDetail.isEmpty()) {
-                                        setoranCounter = ListStoDetail.get(0).getSetor_map().getCounter_setoran();
-                                        setoranCounter++;
-                                        txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                                    } else {
-                                        setoranCounter = 1;
-                                        txtSetoranCounter.setText(String.valueOf(setoranCounter));
-                                    }
-                                } else {
-                                    txtSetoranCounter.setText("1");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!listSetoran.isEmpty() && !listClosingBulananSaldoAwal.isEmpty()) {
-                BigDecimal tKasbon = BigDecimal.ZERO;
-                BigDecimal tBayar = BigDecimal.ZERO;
-                BigDecimal tCicilan = BigDecimal.ZERO;
-                if (!ListStoDetail.isEmpty()) {
-                    if (Main.getTransaksiService().closingBulananRecordForSaldoAwal(komposisisetoran, sys.getTglKerja()).isEmpty()) {
-                        tKasbon = Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findNewClosingByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalKas());
-                        System.out.println("sumKasbon " + spo.getDate() + " = " + Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).toString());
-                        System.out.println("tKasbon= " + tKasbon);
-                        System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
-                        System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
-                        tBayar = Main.getTransaksiService().sumBayarKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findNewClosingByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalBayarKas());
-                        System.out.println("tBayar= " + tBayar);
-                        tCicilan = Main.getTransaksiService().sumCicilan(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findNewClosingByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalCicilan());
-                        System.out.println("tCicilan= " + tCicilan);
-                    } else {
-                        tKasbon = Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalKas());
-                        System.out.println("sumKasbon " + spo.getDate() + " = " + Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).toString());
-                        System.out.println("tKasbon= " + tKasbon);
-                        System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
-                        System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
-                        tBayar = Main.getTransaksiService().sumBayarKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalBayarKas());
-                        System.out.println("tBayar= " + tBayar);
-                        tCicilan = Main.getTransaksiService().sumCicilan(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalCicilan());
-                        System.out.println("tCicilan= " + tCicilan);
-                    }
-                    hutang = tKasbon.subtract(tBayar).subtract(tCicilan);
-                    System.out.println("Hutang= " + hutang);
-//                sumSetoran = Main.getTransaksiService().sumSetoran(new Integer(txtNoLambung.getText()));
-                    if (hutang != null && hutang.compareTo(BigDecimal.ZERO) <= 0) {
-                        hutangToday = BigDecimal.ZERO;
-                        System.out.println("Hutang compare = " + hutang);
-                    } else if (hutang != null && hutang.compareTo(BigDecimal.ZERO) > 0) {
-//                    hutangToday = sumSetoran.subtract(hutang);
-                        hutangToday = hutang;
-                        if (hutangToday.signum() == -1) {
-                            hutangToday = hutangToday.negate();
-                            System.out.println("hutang today= " + hutangToday.signum());
-                        }
-                    } else {
-                        hutang = new BigDecimal(0);
-                        hutangToday = new BigDecimal(0);
-                    }
-
-                    System.out.println("Hutang = " + hutang);
-                    System.out.println("SumSetoran = " + sumSetoran);
-                    System.out.println("Total Hutang Hari Ini = " + hutangToday);
-                    lblHutang.setText(rupiahFormatter.format(hutangToday));
-                    lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
-                } else {
-                    tKasbon = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalKas();
-                    System.out.println("tKasbon= " + tKasbon);
-                    System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
-                    System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
-                    tBayar = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalBayarKas();
-                    System.out.println("tBayar= " + tBayar);
-                    tCicilan = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalCicilan();
-                    System.out.println("tCicilan= " + tCicilan);
-                    hutang = tKasbon.subtract(tBayar).subtract(tCicilan);
-                    System.out.println("Hutang= " + hutang);
-//                sumSetoran = Main.getTransaksiService().sumSetoran(new Integer(txtNoLambung.getText()));
-                    if (hutang != null && hutang.compareTo(BigDecimal.ZERO) <= 0) {
-                        hutangToday = BigDecimal.ZERO;
-                        System.out.println("Hutang compare = " + hutang);
-                    } else if (hutang != null && hutang.compareTo(BigDecimal.ZERO) > 0) {
-//                    hutangToday = sumSetoran.subtract(hutang);
-                        hutangToday = hutang;
-                        if (hutangToday.signum() == -1) {
-                            hutangToday = hutangToday.negate();
-                            System.out.println("hutang today= " + hutangToday.signum());
-                        }
-                    } else {
-                        hutang = new BigDecimal(0);
-                        hutangToday = new BigDecimal(0);
-                    }
-
-                    System.out.println("Hutang = " + hutang);
-                    System.out.println("SumSetoran = " + sumSetoran);
-                    System.out.println("Total Hutang Hari Ini = " + hutangToday);
-                    lblHutang.setText(rupiahFormatter.format(hutangToday));
-                    lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
-                }
-            } else if (!listSetoran.isEmpty() && listClosingBulananSaldoAwal.isEmpty()) {
-                hutang = Main.getTransaksiService().sumHutang(new Integer(txtNoLambung.getText()), TransaksiStatus.U);
-//                sumSetoran = Main.getTransaksiService().sumSetoran(new Integer(txtNoLambung.getText()));
-                if (hutang != null && hutang.compareTo(BigDecimal.ZERO) <= 0) {
-                    hutangToday = BigDecimal.ZERO;
-                    System.out.println("Hutang compare = " + hutang);
-                } else if (hutang != null && hutang.compareTo(BigDecimal.ZERO) > 0) {
-//                    hutangToday = sumSetoran.subtract(hutang);
-                    hutangToday = hutang;
-                    if (hutangToday.signum() == -1) {
-                        hutangToday = hutangToday.negate();
-                        System.out.println("hutang today= " + hutangToday.signum());
-                    }
-                } else {
-                    hutang = new BigDecimal(0);
-                    hutangToday = new BigDecimal(0);
-                }
-
-                System.out.println("Hutang = " + hutang);
-                System.out.println("SumSetoran = " + sumSetoran);
-                System.out.println("Total Hutang Hari Ini = " + hutangToday);
-                lblHutang.setText(rupiahFormatter.format(hutangToday));
-                lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
-            } else if (listSetoran.isEmpty() && !listClosingBulananSaldoAwal.isEmpty()) {
-                BigDecimal tKasbon = BigDecimal.ZERO;
-                BigDecimal tBayar = BigDecimal.ZERO;
-                BigDecimal tCicilan = BigDecimal.ZERO;
-                tKasbon = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalKas();
-                System.out.println("tKasbon= " + tKasbon);
-                System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
-                System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
-                tBayar = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalBayarKas();
-                System.out.println("tBayar= " + tBayar);
-                tCicilan = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalCicilan();
-                System.out.println("tCicilan= " + tCicilan);
-                hutangToday = tKasbon.subtract(tBayar).subtract(tCicilan);
-                if (hutangToday.signum() == -1) {
-                    hutangToday = hutangToday.negate();
-                    System.out.println("hutang today= " + hutangToday.signum());
-                }
-                lblHutang.setText(rupiahFormatter.format(hutangToday));
-                lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
-            } else {
-                hutangToday = BigDecimal.ZERO;
-            }
-        }
-        if (txtNoLambung.getText().isEmpty()) {
-            txtNRP.setText("");
-            txtNama.setText("");
-            txtSetoranCounter.setText("");
-            dateJatuhTempo.setDate(null);
-            dateSPO.setDate(null);
-            txtKeterangan.setText("");
-            checkJalanStatus.setSelected(false);
-            checkJalanStatus.setText("Tidak/Rusak");
-            checkJalanStatus.setFont(new Font("BPG Chveulebrivi", Font.PLAIN, 13));
-            return;
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyChar() == '\n') {
+//            drive = new pengemudi();
+//            kend = new Barang();
+//            Date spo = new Date();
+//            int i = 0;
+//            int a = 0;
+//            checkJalanStatus.setVisible(true);
+//            checkJalanStatus.setEnabled(true);
+//            lblJalanStatus.setVisible(true);
+//            lblJalanStatus.setEnabled(true);
+//            for (; i < listPengemudi.size(); i++) {
+//                if (listPengemudi.get(i).getKend().getNoLambung().toString().startsWith(txtNoLambung.getText())) {
+//                    txtNRP.setText(listPengemudi.get(i).getNrp());
+//                    txtNama.setText(listPengemudi.get(i).getNama());
+//                    txtKeterangan.setText(listPengemudi.get(i).getKend().getKeterangan());
+//                    drive.setId(listPengemudi.get(i).getId());
+//                    kend.setId(listPengemudi.get(i).getKend().getId());
+//                    if (!listSetoran.isEmpty()) {
+//                        if (Main.getSistemService().findBonusBulanan(komposisisetoran.getNamaKomposisi()) != null) {
+//                            ListStoDetail = Main.getTransaksiService().findLastSetoranDetailByLambung(new Integer(txtNoLambung.getText()));
+//                        } else {
+//                            ListStoDetail = Main.getTransaksiService().findSetoranDetailByLambung(new Integer(txtNoLambung.getText()), Main.getTransaksiService().findLastSetoranDetailByLambung(new Integer(txtNoLambung.getText())).get(0).getSetor_map().getTglSPO());
+//                        }
+//                        System.out.println("Setoran Found = " + ListStoDetail.size());
+//                        spo = Main.getTransaksiService().getLatestSetoranCount().get(0).getTglSPO();
+//                        List<setoran> listSTO = Main.getTransaksiService().findLastTglJatuhTempo(JalanStatus.J);
+//                        if (!listSTO.isEmpty()) {
+//                            dateJatuhTempo.setDate(new DateTime(listSTO.get(0).getTglJatuhTempo().getTime()).plusDays(1).toDate());
+//                            dateSPO.setDate(sys.getTglKerja());
+//                        } else {
+//                            if (listSetoran.isEmpty()) {
+//                                dateJatuhTempo.setDate(listPengemudi.get(i).getKend().getTglJatuhTempo());
+//                            } else {
+//                                dateJatuhTempo.setDate(Main.getTransaksiService().findLastTglJatuhTempo(JalanStatus.M).get(0).getTglJatuhTempo());
+//                            }
+//                            dateSPO.setDate(sys.getTglKerja());
+//                        }
+//                    } else {
+//                        dateJatuhTempo.setDate(listPengemudi.get(i).getKend().getTglJatuhTempo());
+//                        dateSPO.setDate(sys.getTglKerja());
+//                    }
+//                    if (listClosingBulananSaldoAwal.isEmpty()) {
+//                        if (!listSetoran.isEmpty()) {
+//                            if (!ListStoDetail.isEmpty()) {
+//                                setoranCounter = ListStoDetail.get(0).getSetor_map().getCounter_setoran();
+//                                setoranCounter++;
+//                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                            } else {
+//                                setoranCounter = 1;
+//                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                            }
+//                        } else {
+//                            setoranCounter = 1;
+//                            txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                        }
+//                    } else {
+//                        for (; a < listClosingBulananSaldoAwal.size(); a++) {
+//                            if (listClosingBulananSaldoAwal.get(a).getActClosing().equals(aksiClosing.DO_CLOSING_SALDO_AWAL)) {
+//                                if (listClosingBulananSaldoAwal.get(a).getRefNoLambung().compareTo(new Integer(txtNoLambung.getText())) == 0) {
+//                                    refNoLambung = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja());
+//                                    if (refNoLambung != null) {
+//                                        setoranCounter = refNoLambung.getRefSetoranKe();
+//                                        setoranCounter++;
+//                                        txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                                        break;
+//                                    } else {
+//                                        if (!listSetoran.isEmpty()) {
+//                                            if (!ListStoDetail.isEmpty()) {
+//                                                setoranCounter = ListStoDetail.get(0).getSetor_map().getCounter_setoran();
+//                                                setoranCounter++;
+//                                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                                            } else {
+//                                                setoranCounter = 1;
+//                                                txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                                            }
+//                                        } else {
+//                                            txtSetoranCounter.setText("1");
+//                                        }
+//                                        break;
+//                                    }
+//                                }
+//                            } else {
+//                                if (!listSetoran.isEmpty()) {
+//                                    if (!ListStoDetail.isEmpty()) {
+//                                        setoranCounter = ListStoDetail.get(0).getSetor_map().getCounter_setoran();
+//                                        setoranCounter++;
+//                                        txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                                    } else {
+//                                        setoranCounter = 1;
+//                                        txtSetoranCounter.setText(String.valueOf(setoranCounter));
+//                                    }
+//                                } else {
+//                                    txtSetoranCounter.setText("1");
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            if (!listSetoran.isEmpty() && !listClosingBulananSaldoAwal.isEmpty()) {
+//                BigDecimal tKasbon = BigDecimal.ZERO;
+//                BigDecimal tBayar = BigDecimal.ZERO;
+//                BigDecimal tCicilan = BigDecimal.ZERO;
+//                if (!ListStoDetail.isEmpty()) {
+//                    if (Main.getTransaksiService().closingBulananRecordForSaldoAwal(komposisisetoran, sys.getTglKerja()).isEmpty()) {
+//                        tKasbon = Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findNewClosingByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalKas());
+//                        System.out.println("sumKasbon " + spo.getDate() + " = " + Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).toString());
+//                        System.out.println("tKasbon= " + tKasbon);
+//                        System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
+//                        System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
+//                        tBayar = Main.getTransaksiService().sumBayarKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findNewClosingByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalBayarKas());
+//                        System.out.println("tBayar= " + tBayar);
+//                        tCicilan = Main.getTransaksiService().sumCicilan(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findNewClosingByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalCicilan());
+//                        System.out.println("tCicilan= " + tCicilan);
+//                    } else {
+//                        tKasbon = Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalKas());
+//                        System.out.println("sumKasbon " + spo.getDate() + " = " + Main.getTransaksiService().sumKasbon(new Integer(txtNoLambung.getText()), spo, spo).toString());
+//                        System.out.println("tKasbon= " + tKasbon);
+//                        System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
+//                        System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
+//                        tBayar = Main.getTransaksiService().sumBayarKasbon(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalBayarKas());
+//                        System.out.println("tBayar= " + tBayar);
+//                        tCicilan = Main.getTransaksiService().sumCicilan(new Integer(txtNoLambung.getText()), spo, spo).add(Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), new DateTime(sys.getTglKerja()).minusMonths(1).toDate()).getTotalCicilan());
+//                        System.out.println("tCicilan= " + tCicilan);
+//                    }
+//                    hutang = tKasbon.subtract(tBayar).subtract(tCicilan);
+//                    System.out.println("Hutang= " + hutang);
+////                sumSetoran = Main.getTransaksiService().sumSetoran(new Integer(txtNoLambung.getText()));
+//                    if (hutang != null && hutang.compareTo(BigDecimal.ZERO) <= 0) {
+//                        hutangToday = BigDecimal.ZERO;
+//                        System.out.println("Hutang compare = " + hutang);
+//                    } else if (hutang != null && hutang.compareTo(BigDecimal.ZERO) > 0) {
+////                    hutangToday = sumSetoran.subtract(hutang);
+//                        hutangToday = hutang;
+//                        if (hutangToday.signum() == -1) {
+//                            hutangToday = hutangToday.negate();
+//                            System.out.println("hutang today= " + hutangToday.signum());
+//                        }
+//                    } else {
+//                        hutang = new BigDecimal(0);
+//                        hutangToday = new BigDecimal(0);
+//                    }
+//
+//                    System.out.println("Hutang = " + hutang);
+//                    System.out.println("SumSetoran = " + sumSetoran);
+//                    System.out.println("Total Hutang Hari Ini = " + hutangToday);
+//                    lblHutang.setText(rupiahFormatter.format(hutangToday));
+//                    lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
+//                } else {
+//                    tKasbon = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalKas();
+//                    System.out.println("tKasbon= " + tKasbon);
+//                    System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
+//                    System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
+//                    tBayar = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalBayarKas();
+//                    System.out.println("tBayar= " + tBayar);
+//                    tCicilan = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalCicilan();
+//                    System.out.println("tCicilan= " + tCicilan);
+//                    hutang = tKasbon.subtract(tBayar).subtract(tCicilan);
+//                    System.out.println("Hutang= " + hutang);
+////                sumSetoran = Main.getTransaksiService().sumSetoran(new Integer(txtNoLambung.getText()));
+//                    if (hutang != null && hutang.compareTo(BigDecimal.ZERO) <= 0) {
+//                        hutangToday = BigDecimal.ZERO;
+//                        System.out.println("Hutang compare = " + hutang);
+//                    } else if (hutang != null && hutang.compareTo(BigDecimal.ZERO) > 0) {
+////                    hutangToday = sumSetoran.subtract(hutang);
+//                        hutangToday = hutang;
+//                        if (hutangToday.signum() == -1) {
+//                            hutangToday = hutangToday.negate();
+//                            System.out.println("hutang today= " + hutangToday.signum());
+//                        }
+//                    } else {
+//                        hutang = new BigDecimal(0);
+//                        hutangToday = new BigDecimal(0);
+//                    }
+//
+//                    System.out.println("Hutang = " + hutang);
+//                    System.out.println("SumSetoran = " + sumSetoran);
+//                    System.out.println("Total Hutang Hari Ini = " + hutangToday);
+//                    lblHutang.setText(rupiahFormatter.format(hutangToday));
+//                    lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
+//                }
+//            } else if (!listSetoran.isEmpty() && listClosingBulananSaldoAwal.isEmpty()) {
+//                hutang = Main.getTransaksiService().sumHutang(new Integer(txtNoLambung.getText()), TransaksiStatus.U);
+////                sumSetoran = Main.getTransaksiService().sumSetoran(new Integer(txtNoLambung.getText()));
+//                if (hutang != null && hutang.compareTo(BigDecimal.ZERO) <= 0) {
+//                    hutangToday = BigDecimal.ZERO;
+//                    System.out.println("Hutang compare = " + hutang);
+//                } else if (hutang != null && hutang.compareTo(BigDecimal.ZERO) > 0) {
+////                    hutangToday = sumSetoran.subtract(hutang);
+//                    hutangToday = hutang;
+//                    if (hutangToday.signum() == -1) {
+//                        hutangToday = hutangToday.negate();
+//                        System.out.println("hutang today= " + hutangToday.signum());
+//                    }
+//                } else {
+//                    hutang = new BigDecimal(0);
+//                    hutangToday = new BigDecimal(0);
+//                }
+//
+//                System.out.println("Hutang = " + hutang);
+//                System.out.println("SumSetoran = " + sumSetoran);
+//                System.out.println("Total Hutang Hari Ini = " + hutangToday);
+//                lblHutang.setText(rupiahFormatter.format(hutangToday));
+//                lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
+//            } else if (listSetoran.isEmpty() && !listClosingBulananSaldoAwal.isEmpty()) {
+//                BigDecimal tKasbon = BigDecimal.ZERO;
+//                BigDecimal tBayar = BigDecimal.ZERO;
+//                BigDecimal tCicilan = BigDecimal.ZERO;
+//                tKasbon = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalKas();
+//                System.out.println("tKasbon= " + tKasbon);
+//                System.out.println("Date First =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMinimumValue()).toDate());
+//                System.out.println("Date End =" + new DateTime(dateSPO.getDate()).withDayOfMonth(new DateTime(dateSPO.getDate()).dayOfMonth().getMaximumValue()).toDate());
+//                tBayar = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalBayarKas();
+//                System.out.println("tBayar= " + tBayar);
+//                tCicilan = Main.getTransaksiService().findClosingSaldoAwalByRefNoLambung(new Integer(txtNoLambung.getText()), sys.getTglKerja()).getTotalCicilan();
+//                System.out.println("tCicilan= " + tCicilan);
+//                hutangToday = tKasbon.subtract(tBayar).subtract(tCicilan);
+//                if (hutangToday.signum() == -1) {
+//                    hutangToday = hutangToday.negate();
+//                    System.out.println("hutang today= " + hutangToday.signum());
+//                }
+//                lblHutang.setText(rupiahFormatter.format(hutangToday));
+//                lblRupiahHutang.setText("Total Yang Harus Di Bayar = " + rupiahFormatter.format(hutangToday.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()))));
+//            } else {
+//                hutangToday = BigDecimal.ZERO;
+//            }
+//        }
+//        if (txtNoLambung.getText().isEmpty()) {
+//            txtNRP.setText("");
+//            txtNama.setText("");
+//            txtSetoranCounter.setText("");
+//            dateJatuhTempo.setDate(null);
+//            dateSPO.setDate(null);
+//            txtKeterangan.setText("");
+//            checkJalanStatus.setSelected(false);
+//            checkJalanStatus.setText("Tidak/Rusak");
+//            checkJalanStatus.setFont(new Font("BPG Chveulebrivi", Font.PLAIN, 13));
+//            return;
+//        }
     }//GEN-LAST:event_txtNoLambungKeyReleased
 
     private void txtCicilanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCicilanKeyReleased
         // TODO add your handling code here:
 
         // ------- SAAT KONDISI MANUAL YANG BERARTI KOMPONEN BAYAR KASBON, OVERTIME, DAN CICILAN/KS/KB DITOTAL SEMUA, DENGAN KONDISI KASBON MANUAL, DEFAULT KASBON : HASIL SUM ANGSURAN DAN TABUNGAN ------ //
-        if (evt.isControlDown()) {
-            BigDecimal totalManual = new BigDecimal(0);
-            BigDecimal totalAngsuran = new BigDecimal(0);
-            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-                if (txtKasbon.getText().equalsIgnoreCase(TextComponentUtils.formatNumber(totalAngsuran))) {
-                    totalManual = totalManual.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-                } else if (txtKasbon.getText().equalsIgnoreCase("0")) {
-                    totalManual = totalManual.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText())).add(totalAngsuran);
-                }
-                lblNominal.setText(rupiahFormatter.format(totalManual));
-            }
-        } else {
-            // ---------- KEADAAN BERHUTANG ---------------//
-            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                BigDecimal totalKasbon = new BigDecimal(0);
-                BigDecimal totalAngsuran = new BigDecimal(0);
-                BigDecimal totalHutang = new BigDecimal(0);
-                BigDecimal totalSurplus = new BigDecimal(0);
-                BigDecimal mustPaid = new BigDecimal(0);
-                if (isEditFire) {
-                    listSetoran = Main.getTransaksiService().findAllAvailableSetoranByLambung(new Integer(txtNoLambung.getText()), dateSPO.getDate(), isClosedStatus.AVAILABLE);
-                    hutangToday = TextComponentUtils.parseNumberToBigDecimal(lblHutang.getText().substring(3));
-                }
-                if (sto == null) {
-                    sto = new setoran();
-                    stoDet = new setoranDetail();
-                }
-
-                // ------- SAAT JUMLAH TRANSAKSI TIDAK KOSONG DAN HUTANG HARI INI LEBIH DARI 0 ------ //
-                if (!listSetoran.isEmpty() && hutangToday.compareTo(BigDecimal.ZERO) > 0) {
-
-                    // ----- CEK APAKAH KOMPONEN HUTANG(KASBON, BAYAR KASBON, OVERTIME, CICILAN) TIDAK KOSONG -------- //
-                    if (validateHutang()) {
-//            if (lblNominal.getSize().width > labelOverSize) {
-//                lblNominal.setFont(new Font("BPG Chveulebrivi", Font.BOLD, 18));
-//                lblNominal.repaint();
-//                pnlTerimaKasir.updateUI();
-//
-//            } else {
-//                lblNominal.setFont(new Font("BPG Chveulebrivi", Font.BOLD, 24));
-//                lblNominal.repaint();
-//                pnlTerimaKasir.updateUI();
+//        if (evt.isControlDown()) {
+//            BigDecimal totalManual = new BigDecimal(0);
+//            BigDecimal totalAngsuran = new BigDecimal(0);
+//            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//                totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
+//                if (txtKasbon.getText().equalsIgnoreCase(TextComponentUtils.formatNumber(totalAngsuran))) {
+//                    totalManual = totalManual.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+//                } else if (txtKasbon.getText().equalsIgnoreCase("0")) {
+//                    totalManual = totalManual.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText())).add(totalAngsuran);
+//                }
+//                lblNominal.setText(rupiahFormatter.format(totalManual));
 //            }
-//            sto = Main.getTransaksiService().findByNoLambung(new Integer(txtNoLambung.getText()));
-                        // -- BILA SEDANG UPDATE TRANSAKSI -- //
-                        if (isEditFire) {
-                            totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-                            mustPaid = hutangToday;
-                            System.out.println("must Paid=" + mustPaid);
-                            totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-                            totalHutang = totalHutang.add(totalKasbon.subtract(mustPaid));
-                            System.out.println("total kasbon= " + totalKasbon);
-                            System.out.println("total hutang= " + totalHutang);
-                            if (totalHutang.signum() == -1) {
-                                totalHutang = totalHutang.negate();
-                            }
-                            if (totalHutang.compareTo(BigDecimal.ZERO) == 0) {
-                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
-                                    totalSurplus = totalSurplus.add(totalKasbon).subtract(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
-                                    lblRupiahKasir.setVisible(true);
-                                    txtKasbon.setText("0");
-                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-                                    sto.setPayedStatus(TransaksiStatus.L);
-                                } else {
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon));
-                                    lblHutang.setText(rupiahFormatter.format(totalHutang));
-                                    txtKasbon.setText("0");
-                                    sto.setPayedStatus(TransaksiStatus.L);
-                                    System.out.println("payed = " + sto.getPayedStatus());
-                                }
-                            }
-
-                            if (totalHutang.compareTo(BigDecimal.ZERO) > 0) {
-                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
-                                    totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
-                                    lblRupiahKasir.setVisible(true);
-                                    txtKasbon.setText("0");
-                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-                                    sto.setPayedStatus(TransaksiStatus.L);
-                                } else {
-//                        if (totalKasbon.compareTo(mustPaid) > 0) {
-//                            JOptionPane.showMessageDialog(this, "Pembayaran Tidak Boleh Lebih Besar Dari Jumlah Yang Harus Dibayar = " + mustPaid, "Pesan Sistem", JOptionPane.WARNING_MESSAGE);
-//                            txtBayarKasbon.requestFocus();
+//        } else {
+//            // ---------- KEADAAN BERHUTANG ---------------//
+//            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//                BigDecimal totalKasbon = new BigDecimal(0);
+//                BigDecimal totalAngsuran = new BigDecimal(0);
+//                BigDecimal totalHutang = new BigDecimal(0);
+//                BigDecimal totalSurplus = new BigDecimal(0);
+//                BigDecimal mustPaid = new BigDecimal(0);
+//                if (isEditFire) {
+//                    listSetoran = Main.getTransaksiService().findAllAvailableSetoranByLambung(new Integer(txtNoLambung.getText()), dateSPO.getDate(), isClosedStatus.AVAILABLE);
+//                    hutangToday = TextComponentUtils.parseNumberToBigDecimal(lblHutang.getText().substring(3));
+//                }
+//                if (sto == null) {
+//                    sto = new setoran();
+//                    stoDet = new setoranDetail();
+//                }
+//
+//                // ------- SAAT JUMLAH TRANSAKSI TIDAK KOSONG DAN HUTANG HARI INI LEBIH DARI 0 ------ //
+//                if (!listSetoran.isEmpty() && hutangToday.compareTo(BigDecimal.ZERO) > 0) {
+//
+//                    // ----- CEK APAKAH KOMPONEN HUTANG(KASBON, BAYAR KASBON, OVERTIME, CICILAN) TIDAK KOSONG -------- //
+//                    if (validateHutang()) {
+////            if (lblNominal.getSize().width > labelOverSize) {
+////                lblNominal.setFont(new Font("BPG Chveulebrivi", Font.BOLD, 18));
+////                lblNominal.repaint();
+////                pnlTerimaKasir.updateUI();
+////
+////            } else {
+////                lblNominal.setFont(new Font("BPG Chveulebrivi", Font.BOLD, 24));
+////                lblNominal.repaint();
+////                pnlTerimaKasir.updateUI();
+////            }
+////            sto = Main.getTransaksiService().findByNoLambung(new Integer(txtNoLambung.getText()));
+//                        // -- BILA SEDANG UPDATE TRANSAKSI -- //
+//                        if (isEditFire) {
+//                            totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
+//                            mustPaid = hutangToday;
+//                            System.out.println("must Paid=" + mustPaid);
+//                            totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+//                            totalHutang = totalHutang.add(totalKasbon.subtract(mustPaid));
+//                            System.out.println("total kasbon= " + totalKasbon);
+//                            System.out.println("total hutang= " + totalHutang);
+//                            if (totalHutang.signum() == -1) {
+//                                totalHutang = totalHutang.negate();
+//                            }
+//                            if (totalHutang.compareTo(BigDecimal.ZERO) == 0) {
+//                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
+//                                    totalSurplus = totalSurplus.add(totalKasbon).subtract(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+//                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
+//                                    lblRupiahKasir.setVisible(true);
+//                                    txtKasbon.setText("0");
+//                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+//                                    sto.setPayedStatus(TransaksiStatus.L);
+//                                } else {
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon));
+//                                    lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                                    txtKasbon.setText("0");
+//                                    sto.setPayedStatus(TransaksiStatus.L);
+//                                    System.out.println("payed = " + sto.getPayedStatus());
+//                                }
+//                            }
+//
+//                            if (totalHutang.compareTo(BigDecimal.ZERO) > 0) {
+//                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
+//                                    totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+//                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
+//                                    lblRupiahKasir.setVisible(true);
+//                                    txtKasbon.setText("0");
+//                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+//                                    sto.setPayedStatus(TransaksiStatus.L);
+//                                } else {
+////                        if (totalKasbon.compareTo(mustPaid) > 0) {
+////                            JOptionPane.showMessageDialog(this, "Pembayaran Tidak Boleh Lebih Besar Dari Jumlah Yang Harus Dibayar = " + mustPaid, "Pesan Sistem", JOptionPane.WARNING_MESSAGE);
+////                            txtBayarKasbon.requestFocus();
+////                        } else {
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon));
+//                                    lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                                    txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+//                                    sto.setPayedStatus(TransaksiStatus.U);
+//                                    System.out.println("payed = " + sto.getPayedStatus());
+//                                }
+//                            }
+//                            // -- BILA TIDAK SEDANG UPDATE TRANSAKSI / KEADAAN MENAMBAH TRANSAKSI BARU -- //
 //                        } else {
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon));
-                                    lblHutang.setText(rupiahFormatter.format(totalHutang));
-                                    txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
-                                    sto.setPayedStatus(TransaksiStatus.U);
-                                    System.out.println("payed = " + sto.getPayedStatus());
-                                }
-                            }
-                            // -- BILA TIDAK SEDANG UPDATE TRANSAKSI / KEADAAN MENAMBAH TRANSAKSI BARU -- //
-                        } else {
-                            totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-                            mustPaid = hutangToday.add(totalAngsuran);
-                            System.out.println("must Paid=" + mustPaid);
-                            totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-                            if (txtKasbon.getText().equalsIgnoreCase("0")) {
-                                totalHutang = totalHutang.add(totalAngsuran.add(totalKasbon)).subtract(mustPaid);
-                            } else if (txtKasbon.getText().isEmpty() || txtKasbon.getText().compareTo(TextComponentUtils.formatNumber(totalAngsuran)) == 0) {
-                                totalHutang = totalHutang.add(totalKasbon.subtract(mustPaid));
-                            }
-                            System.out.println("total angsuran = " + totalAngsuran);
-                            System.out.println("total kasbon = " + totalKasbon);
-                            System.out.println("total hutang = " + totalHutang);
-                            if (totalHutang.signum() == -1) {
-                                totalHutang = totalHutang.negate();
-                            }
-                            if (totalHutang.compareTo(BigDecimal.ZERO) == 0) {
-                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
-                                    totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
-                                    lblRupiahKasir.setVisible(true);
-                                    txtKasbon.setText("0");
-                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-                                    sto.setPayedStatus(TransaksiStatus.L);
-                                } else {
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-                                    lblHutang.setText(rupiahFormatter.format(totalHutang));
-                                    txtKasbon.setText("0");
-                                    sto.setPayedStatus(TransaksiStatus.L);
-                                    System.out.println("payed = " + sto.getPayedStatus());
-                                }
-
-                            }
-                            if (totalHutang.compareTo(BigDecimal.ZERO) > 0) {
-                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
-                                    totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
-                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
-                                    lblRupiahKasir.setVisible(true);
-                                    txtKasbon.setText("0");
-                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-                                    sto.setPayedStatus(TransaksiStatus.L);
-                                } else {
-                                    if (txtKasbon.getText().equalsIgnoreCase("0")
-                                            && txtBayarKasbon.getText().equalsIgnoreCase("0")
-                                            && txtOvertime.getText().equalsIgnoreCase("0")
-                                            && txtCicilan.getText().equalsIgnoreCase("0")) {
-                                        lblNominal.setText(rupiahFormatter.format(totalAngsuran));
-                                        lblHutang.setText(rupiahFormatter.format(totalHutang));
-                                        sto.setPayedStatus(TransaksiStatus.U);
-                                    } else {
-//                        if (totalKasbon.compareTo(mustPaid) > 0) {
-//                            JOptionPane.showMessageDialog(this, "Pembayaran Tidak Boleh Lebih Besar Dari Jumlah Yang Harus Dibayar = " + mustPaid, "Pesan Sistem", JOptionPane.WARNING_MESSAGE);
-//                            txtBayarKasbon.requestFocus();
-//                        } else {
-                                        lblNominal.setText(rupiahFormatter.format(totalKasbon));
-                                        lblHutang.setText(rupiahFormatter.format(totalHutang));
-                                        txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
-                                        sto.setPayedStatus(TransaksiStatus.U);
-                                        System.out.println("payed = " + sto.getPayedStatus());
-                                    }
-                                }
-
-//                            } else {
-//                        if (totalKasbon.compareTo(mustPaid) > 0) {
-//                            JOptionPane.showMessageDialog(this, "Pembayaran Tidak Boleh Lebih Besar Dari Jumlah Yang Harus Dibayar = " + mustPaid, "Pesan Sistem", JOptionPane.WARNING_MESSAGE);
-//                            txtBayarKasbon.requestFocus();
-//                        } else {
-//                                lblNominal.setText(rupiahFormatter.format(totalKasbon));
-//                                lblHutang.setText(rupiahFormatter.format(totalHutang));
-//                                txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
-//                                sto.setPayedStatus(TransaksiStatus.U);
-//                                System.out.println("payed = " + sto.getPayedStatus());
-                            }
-
-                        }
-//                    sto.setJalanStatus(JalanStatus.J);
-                        System.out.println("total angsuran = " + totalAngsuran);
-                        System.out.println("total kasbon = " + totalKasbon);
-                        System.out.println("hutang hari ini = " + hutangToday);
-                        System.out.println("total hutang =" + totalHutang);
-
-                        // ----- APABILA KOMPONEN HUTANG KOSONG ----- //
-                    } else {
-                        totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-                        txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
-                        lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
-                        totalKasbon = totalAngsuran;
-                        totalHutang = totalHutang.add(totalKasbon.add(hutangToday));
-                        lblHutang.setText(rupiahFormatter.format(totalHutang));
-                        sto.setPayedStatus(TransaksiStatus.U);
-//                    sto.setJalanStatus(JalanStatus.M);
-                        System.out.println("payed status = " + sto.getPayedStatus());
-                        txtBayarKasbon.setText("0");
-                        txtOvertime.setText("0");
-                        txtCicilan.setText("0");
-                    }
-
-                    // ------- SAAT JUMLAH TRANSAKSI KOSONG DAN HUTANG HARI INI LEBIH DARI 0 ------ //
-//                } else if (listSetoran.isEmpty() && hutangToday.compareTo(BigDecimal.ZERO) > 0) {
-//                    totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-//                    totalKasbon = hutangToday.add(totalAngsuran);
-//                    lblHutang.setText(rupiahFormatter.format(totalKasbon));
-//                    lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
-//                    txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
-//                    txtBayarKasbon.setText("0");
-//                    txtOvertime.setText("0");
-//                    txtCicilan.setText("0");
-//                    sto.setPayedStatus(TransaksiStatus.U);
-
-                    // ------- SAAT JUMLAH TRANSAKSI TIDAK KOSONG DAN HUTANG HARI INI KURANG DARI ATAU SAMA DENGAN 0 ------ //
-//                } else if (listSetoran.isEmpty() && hutangToday.compareTo(BigDecimal.ZERO) <= 0) {
-//                    totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-//                    totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-//                    mustPaid = hutangToday.add(totalAngsuran);
-//                    if (validateHutang() && totalKasbon.compareTo(totalAngsuran) > 0) {
-//                        txtKasbon.setText("0");
-//                        lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-//                        lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-//                        sto.setPayedStatus(TransaksiStatus.L);
-//                    } else if (validateHutang() && totalKasbon.compareTo(totalAngsuran) < 0) {
-//                        JOptionPane.showMessageDialog(this, "Jumlah Pembayaran Yang Anda Masukkan Tidak Boleh Kurang Dari " + totalAngsuran, "Pesan Sistem", JOptionPane.ERROR_MESSAGE);
-//                        txtBayarKasbon.requestFocus();
+//                            totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
+//                            mustPaid = hutangToday.add(totalAngsuran);
+//                            System.out.println("must Paid=" + mustPaid);
+//                            totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+//                            if (txtKasbon.getText().equalsIgnoreCase("0")) {
+//                                totalHutang = totalHutang.add(totalAngsuran.add(totalKasbon)).subtract(mustPaid);
+//                            } else if (txtKasbon.getText().isEmpty() || txtKasbon.getText().compareTo(TextComponentUtils.formatNumber(totalAngsuran)) == 0) {
+//                                totalHutang = totalHutang.add(totalKasbon.subtract(mustPaid));
+//                            }
+//                            System.out.println("total angsuran = " + totalAngsuran);
+//                            System.out.println("total kasbon = " + totalKasbon);
+//                            System.out.println("total hutang = " + totalHutang);
+//                            if (totalHutang.signum() == -1) {
+//                                totalHutang = totalHutang.negate();
+//                            }
+//                            if (totalHutang.compareTo(BigDecimal.ZERO) == 0) {
+//                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
+//                                    totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+//                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
+//                                    lblRupiahKasir.setVisible(true);
+//                                    txtKasbon.setText("0");
+//                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+//                                    sto.setPayedStatus(TransaksiStatus.L);
+//                                } else {
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+//                                    lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                                    txtKasbon.setText("0");
+//                                    sto.setPayedStatus(TransaksiStatus.L);
+//                                    System.out.println("payed = " + sto.getPayedStatus());
+//                                }
+//
+//                            }
+//                            if (totalHutang.compareTo(BigDecimal.ZERO) > 0) {
+//                                if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) > 0) {
+//                                    totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
+//                                    lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+//                                    lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
+//                                    lblRupiahKasir.setVisible(true);
+//                                    txtKasbon.setText("0");
+//                                    lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+//                                    sto.setPayedStatus(TransaksiStatus.L);
+//                                } else {
+//                                    if (txtKasbon.getText().equalsIgnoreCase("0")
+//                                            && txtBayarKasbon.getText().equalsIgnoreCase("0")
+//                                            && txtOvertime.getText().equalsIgnoreCase("0")
+//                                            && txtCicilan.getText().equalsIgnoreCase("0")) {
+//                                        lblNominal.setText(rupiahFormatter.format(totalAngsuran));
+//                                        lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                                        sto.setPayedStatus(TransaksiStatus.U);
+//                                    } else {
+////                        if (totalKasbon.compareTo(mustPaid) > 0) {
+////                            JOptionPane.showMessageDialog(this, "Pembayaran Tidak Boleh Lebih Besar Dari Jumlah Yang Harus Dibayar = " + mustPaid, "Pesan Sistem", JOptionPane.WARNING_MESSAGE);
+////                            txtBayarKasbon.requestFocus();
+////                        } else {
+//                                        lblNominal.setText(rupiahFormatter.format(totalKasbon));
+//                                        lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                                        txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+//                                        sto.setPayedStatus(TransaksiStatus.U);
+//                                        System.out.println("payed = " + sto.getPayedStatus());
+//                                    }
+//                                }
+//
+////                            } else {
+////                        if (totalKasbon.compareTo(mustPaid) > 0) {
+////                            JOptionPane.showMessageDialog(this, "Pembayaran Tidak Boleh Lebih Besar Dari Jumlah Yang Harus Dibayar = " + mustPaid, "Pesan Sistem", JOptionPane.WARNING_MESSAGE);
+////                            txtBayarKasbon.requestFocus();
+////                        } else {
+////                                lblNominal.setText(rupiahFormatter.format(totalKasbon));
+////                                lblHutang.setText(rupiahFormatter.format(totalHutang));
+////                                txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+////                                sto.setPayedStatus(TransaksiStatus.U);
+////                                System.out.println("payed = " + sto.getPayedStatus());
+//                            }
+//
+//                        }
+////                    sto.setJalanStatus(JalanStatus.J);
+//                        System.out.println("total angsuran = " + totalAngsuran);
+//                        System.out.println("total kasbon = " + totalKasbon);
+//                        System.out.println("hutang hari ini = " + hutangToday);
+//                        System.out.println("total hutang =" + totalHutang);
+//
+//                        // ----- APABILA KOMPONEN HUTANG KOSONG ----- //
 //                    } else {
+//                        totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
 //                        txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+//                        lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
+//                        totalKasbon = totalAngsuran;
+//                        totalHutang = totalHutang.add(totalKasbon.add(hutangToday));
+//                        lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                        sto.setPayedStatus(TransaksiStatus.U);
+////                    sto.setJalanStatus(JalanStatus.M);
+//                        System.out.println("payed status = " + sto.getPayedStatus());
 //                        txtBayarKasbon.setText("0");
 //                        txtOvertime.setText("0");
 //                        txtCicilan.setText("0");
-//                        lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
-//                        lblHutang.setText(rupiahFormatter.format(totalAngsuran));
-//                        sto.setPayedStatus(TransaksiStatus.U);
 //                    }
-//                    if (isEditFire) {
-//                        if (totalAngsuran.add(totalKasbon).compareTo(hutangToday) >= 0) {
-//                            totalSurplus = totalSurplus.add(totalKasbon).add(totalAngsuran).subtract(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-//                            lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-//                            lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
-//                            lblRupiahKasir.setVisible(true);
-//                            txtKasbon.setText("0");
-//                            lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-//                            sto.setPayedStatus(TransaksiStatus.L);
-//                        } else {
-//                            if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) >= 0) {
-//                                totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
-//                                lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
-//                                lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
-//                                lblRupiahKasir.setVisible(true);
-//                                txtKasbon.setText("0");
-//                                lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-//                                sto.setPayedStatus(TransaksiStatus.L);
-//                            }
-//                        }
-//                    }
-//            totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
-//            totalHutang = totalHutang.add(totalAngsuran.subtract(totalKasbon));
-//                sto.setPayedStatus(TransaksiStatus.L);
-//                sto.setJalanStatus(JalanStatus.J);
-//                System.out.println("payed = " + sto.getPayedStatus());
-//                txtKasbon.setText("0");
-//                txtBayarKasbon.setText("0");
-//                txtOvertime.setText("0");
-//                txtCicilan.setText("0");
-//                lblNominal.setText(rupiahFormatter.format(totalAngsuran));
-//                lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
-//                System.out.println("total angsuran = " + totalAngsuran);
-//                System.out.println("total kasbon = " + totalKasbon);
-//                System.out.println("hutang hari ini = " + hutangToday);
-//                System.out.println("total hutang =" + totalHutang);
-                } else {
-                    totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
-                    txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
-                    lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
-                    totalKasbon = totalAngsuran;
-                    totalHutang = totalHutang.add(totalKasbon.add(hutangToday));
-                    lblHutang.setText(rupiahFormatter.format(totalHutang));
-                    sto.setPayedStatus(TransaksiStatus.U);
-//                    sto.setJalanStatus(JalanStatus.M);
-                    System.out.println("payed status = " + sto.getPayedStatus());
-                    txtBayarKasbon.setText("0");
-                    txtOvertime.setText("0");
-                    txtCicilan.setText("0");
-                }
-            }
-        }
+//
+//                    // ------- SAAT JUMLAH TRANSAKSI KOSONG DAN HUTANG HARI INI LEBIH DARI 0 ------ //
+////                } else if (listSetoran.isEmpty() && hutangToday.compareTo(BigDecimal.ZERO) > 0) {
+////                    totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
+////                    totalKasbon = hutangToday.add(totalAngsuran);
+////                    lblHutang.setText(rupiahFormatter.format(totalKasbon));
+////                    lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
+////                    txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+////                    txtBayarKasbon.setText("0");
+////                    txtOvertime.setText("0");
+////                    txtCicilan.setText("0");
+////                    sto.setPayedStatus(TransaksiStatus.U);
+//
+//                    // ------- SAAT JUMLAH TRANSAKSI TIDAK KOSONG DAN HUTANG HARI INI KURANG DARI ATAU SAMA DENGAN 0 ------ //
+////                } else if (listSetoran.isEmpty() && hutangToday.compareTo(BigDecimal.ZERO) <= 0) {
+////                    totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
+////                    totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+////                    mustPaid = hutangToday.add(totalAngsuran);
+////                    if (validateHutang() && totalKasbon.compareTo(totalAngsuran) > 0) {
+////                        txtKasbon.setText("0");
+////                        lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+////                        lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+////                        sto.setPayedStatus(TransaksiStatus.L);
+////                    } else if (validateHutang() && totalKasbon.compareTo(totalAngsuran) < 0) {
+////                        JOptionPane.showMessageDialog(this, "Jumlah Pembayaran Yang Anda Masukkan Tidak Boleh Kurang Dari " + totalAngsuran, "Pesan Sistem", JOptionPane.ERROR_MESSAGE);
+////                        txtBayarKasbon.requestFocus();
+////                    } else {
+////                        txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+////                        txtBayarKasbon.setText("0");
+////                        txtOvertime.setText("0");
+////                        txtCicilan.setText("0");
+////                        lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
+////                        lblHutang.setText(rupiahFormatter.format(totalAngsuran));
+////                        sto.setPayedStatus(TransaksiStatus.U);
+////                    }
+////                    if (isEditFire) {
+////                        if (totalAngsuran.add(totalKasbon).compareTo(hutangToday) >= 0) {
+////                            totalSurplus = totalSurplus.add(totalKasbon).add(totalAngsuran).subtract(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+////                            lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+////                            lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
+////                            lblRupiahKasir.setVisible(true);
+////                            txtKasbon.setText("0");
+////                            lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+////                            sto.setPayedStatus(TransaksiStatus.L);
+////                        } else {
+////                            if (totalAngsuran.add(totalKasbon).compareTo(mustPaid) >= 0) {
+////                                totalSurplus = totalSurplus.add(totalAngsuran.add(totalKasbon).subtract(mustPaid));
+////                                lblNominal.setText(rupiahFormatter.format(totalKasbon.add(totalAngsuran)));
+////                                lblRupiahKasir.setText("Surplus = " + rupiahFormatter.format(totalSurplus));
+////                                lblRupiahKasir.setVisible(true);
+////                                txtKasbon.setText("0");
+////                                lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+////                                sto.setPayedStatus(TransaksiStatus.L);
+////                            }
+////                        }
+////                    }
+////            totalKasbon = totalKasbon.add(TextComponentUtils.parseNumberToBigDecimal(txtBayarKasbon.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtOvertime.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtCicilan.getText()));
+////            totalHutang = totalHutang.add(totalAngsuran.subtract(totalKasbon));
+////                sto.setPayedStatus(TransaksiStatus.L);
+////                sto.setJalanStatus(JalanStatus.J);
+////                System.out.println("payed = " + sto.getPayedStatus());
+////                txtKasbon.setText("0");
+////                txtBayarKasbon.setText("0");
+////                txtOvertime.setText("0");
+////                txtCicilan.setText("0");
+////                lblNominal.setText(rupiahFormatter.format(totalAngsuran));
+////                lblHutang.setText(rupiahFormatter.format(BigDecimal.ZERO));
+////                System.out.println("total angsuran = " + totalAngsuran);
+////                System.out.println("total kasbon = " + totalKasbon);
+////                System.out.println("hutang hari ini = " + hutangToday);
+////                System.out.println("total hutang =" + totalHutang);
+//                } else {
+//                    totalAngsuran = totalAngsuran.add(TextComponentUtils.parseNumberToBigDecimal(txtAngsuran.getText())).add(TextComponentUtils.parseNumberToBigDecimal(txtTabungan.getText()));
+//                    txtKasbon.setText(TextComponentUtils.formatNumber(totalAngsuran));
+//                    lblNominal.setText(rupiahFormatter.format(BigDecimal.ZERO));
+//                    totalKasbon = totalAngsuran;
+//                    totalHutang = totalHutang.add(totalKasbon.add(hutangToday));
+//                    lblHutang.setText(rupiahFormatter.format(totalHutang));
+//                    sto.setPayedStatus(TransaksiStatus.U);
+////                    sto.setJalanStatus(JalanStatus.M);
+//                    System.out.println("payed status = " + sto.getPayedStatus());
+//                    txtBayarKasbon.setText("0");
+//                    txtOvertime.setText("0");
+//                    txtCicilan.setText("0");
+//                }
+//            }
+//        }
     }//GEN-LAST:event_txtCicilanKeyReleased
 
     private void txtNoLambungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNoLambungMouseClicked
@@ -2428,23 +2428,23 @@ public class TransaksiSetoran extends javax.swing.JInternalFrame implements List
 
     private void dateCariSetoranPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateCariSetoranPropertyChange
         // TODO add your handling code here:
-        if (dateCariSetoran.getDate() != null) {
-            if (sto == null) {
-                sto = new setoran();
-                stoDet = new setoranDetail();
-            }
-            listSetoran = Main.getTransaksiService().findAllAvailableSetoranByLambung(new Integer(txtCariSetoranLambung.getText()), dateCariSetoran.getDate(), isClosedStatus.AVAILABLE);
-            for (int i = 0; i <= listSetoran.size(); i++) {
-                if (txtCariSetoranLambung.getText().startsWith(listSetoran.get(i).getDetail().get(0).getKemudi().getKend().getNoLambung().toString())) {
-                    tblSetoran.removeAll();
-                    sto = listSetoran.get(i);
-                    stoDet.setSetor_map(sto);
-                    listSetoranDetail.add(stoDet);
-                    tblSetoran.setModel(new TransaksiSetoranTableModel(listSetoranDetail));
-                    initColumnSize();
-                }
-            }
-        }
+//        if (dateCariSetoran.getDate() != null) {
+//            if (sto == null) {
+//                sto = new setoran();
+//                stoDet = new setoranDetail();
+//            }
+//            listSetoran = Main.getTransaksiService().findAllAvailableSetoranByLambung(new Integer(txtCariSetoranLambung.getText()), dateCariSetoran.getDate(), isClosedStatus.AVAILABLE);
+//            for (int i = 0; i <= listSetoran.size(); i++) {
+//                if (txtCariSetoranLambung.getText().startsWith(listSetoran.get(i).getDetail().get(0).getKemudi().getKend().getNoLambung().toString())) {
+//                    tblSetoran.removeAll();
+//                    sto = listSetoran.get(i);
+//                    stoDet.setSetor_map(sto);
+//                    listSetoranDetail.add(stoDet);
+//                    tblSetoran.setModel(new TransaksiSetoranTableModel(listSetoranDetail));
+//                    initColumnSize();
+//                }
+//            }
+//        }
     }//GEN-LAST:event_dateCariSetoranPropertyChange
 
     private void txtCariSetoranLambungKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariSetoranLambungKeyReleased

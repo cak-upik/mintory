@@ -10,15 +10,13 @@
  */
 package mintory.master;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JButton;
 
 /**
  *
  * @author i1440ns
  */
-public class buttonMaster extends javax.swing.JPanel {
+public final class buttonMaster extends javax.swing.JPanel {
 
     /** Creates new form buttonMaster */
     public buttonMaster() {
@@ -101,30 +99,44 @@ public class buttonMaster extends javax.swing.JPanel {
         btnKeluar = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
-        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/new.png"))); // NOI18N
+        btnTambah.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/new.png"))); // NOI18N
         btnTambah.setText("Tambah F1");
 
-        btnUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/edit.png"))); // NOI18N
+        btnUbah.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/edit.png"))); // NOI18N
         btnUbah.setText("Ubah   F2");
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/save.png"))); // NOI18N
+        btnSimpan.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/save.png"))); // NOI18N
         btnSimpan.setText("Simpan  F3");
 
-        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/dekstop.png"))); // NOI18N
+        btnKeluar.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/exits.png"))); // NOI18N
         btnKeluar.setText("Keluar  F6");
 
-        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/deletes.png"))); // NOI18N
+        btnHapus.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/deletes.png"))); // NOI18N
         btnHapus.setText("Hapus  F4");
 
-        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/stop.png"))); // NOI18N
+        btnBatal.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/quit.png"))); // NOI18N
         btnBatal.setText("Batal  F5");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/blue-white-striped-arrow.png"))); // NOI18N
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/blue-white-striped-arrow-flipped.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUbah)
@@ -135,23 +147,29 @@ public class buttonMaster extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBatal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnKeluar))
+                .addComponent(btnKeluar)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnHapus, btnKeluar, btnSimpan, btnTambah, btnUbah});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER, false)
                 .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnUbah)
+                .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(btnSimpan)
                 .addComponent(btnHapus)
                 .addComponent(btnBatal)
-                .addComponent(btnKeluar))
+                .addComponent(btnKeluar, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnHapus, btnKeluar, btnSimpan, btnTambah, btnUbah});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2});
 
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -161,6 +179,8 @@ public class buttonMaster extends javax.swing.JPanel {
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
 }

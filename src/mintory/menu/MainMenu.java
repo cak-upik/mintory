@@ -31,30 +31,15 @@ import mintory.config.UbahSaldoAwalPth;
 import mintory.config.UserLogin;
 import mintory.dialog.LookupSetTanggal;
 import mintory.dialog.UserLoginUbahSistem;
-import mintory.master.MasterKendaraan;
-import mintory.master.MasterKendaraanPutih;
+import mintory.master.MasterBarang;
 import mintory.master.MasterPengemudi;
-import mintory.master.MasterPengemudiPutih;
+import mintory.master.MasterSupplier;
 import mintory.model.SecurityConstants;
 import mintory.model.SecurityUser;
 import mintory.model.codeGenerator;
 import mintory.model.sistem;
-import mintory.report.ui.LaporanDataLambungBulanan;
-import mintory.report.ui.LaporanDataLambungBulananPth;
-import mintory.report.ui.LaporanKartuBayar;
-import mintory.report.ui.LaporanKartuBayarPth;
-import mintory.report.ui.LaporanTransaksiBulanan;
-import mintory.report.ui.LaporanTransaksiBulananPth;
-import mintory.report.ui.LaporanTransaksiHarian;
-import mintory.report.ui.LaporanTransaksiHarianPth;
 import mintory.transaksi.ClosingBulanan;
-import mintory.transaksi.ClosingTahunan;
-import mintory.transaksi.InputBonusBulanan;
-import mintory.transaksi.ManajemenPiutang;
-import mintory.transaksi.ManajemenPiutangPutih;
 import mintory.transaksi.SaldoAwal;
-import mintory.transaksi.TransaksiSetoran;
-import mintory.transaksi.TransaksiSetoranPutih;
 
 /**
  *
@@ -83,10 +68,6 @@ public class MainMenu extends javax.swing.JFrame {
         initButtonHotkeyFunction();
         sys = Main.getSistemService().sistemRecord();
         validasiSistem();
-        jMenuItem6.setArmed(false);
-        jMenuItem5.setArmed(false);
-        lblFastTransaksi.setVisible(true);
-        lblFastSaldoAwal.setVisible(true);
     }
 
     private void initButtonHotkeyFunction() {
@@ -107,33 +88,33 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     private void validasiSistem() {
-        if (sys == null) {
-            Sistem.inisialisasi();
-            showMenu(false);
+//        if (sys == null) {
+//            Sistem.inisialisasi();
+            showMenu(true);
             lblUser.setText("Lakukan Setting User Pada Konfigurasi Sistem");
             lblTanggalKerja.setText("Lakukan Setting Tanggal Pada Konfigurasi Sistem");
-            int konfirmasi = JOptionPane.showConfirmDialog(this, "Sistem Belum Di Konfigurasi\nLakukan Konfigurasi Sekarang ? ?", "Pesan Sistem", OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (konfirmasi == JOptionPane.OK_OPTION) {
-                try {
-                    desktoPane.add(Sistem.getSistem());
-                    ukuranLayar = desktoPane.getSize();
-                    ukuranFrame = Sistem.getSistem().getSize();
-                    Sistem.getSistem().setVisible(true);
-                    //                Sistem.getSistem().setLocation((ukuranLayar.width - ukuranFrame.width) / 16 + 380, (ukuranLayar.height - ukuranFrame.height) / 16 + 100);
-                    Sistem.getSistem().setLocation((ukuranLayar.width - ukuranFrame.width) / 2, (ukuranLayar.height - ukuranFrame.height) / 2);
-                    Sistem.getSistem().setSelected(true);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (konfirmasi == JOptionPane.CANCEL_OPTION) {
-                System.gc();
-                System.exit(0);
-            }
-        } else if (sys != null) {
-            MainLoginState();
-            setTanggalKerja(sys.getTglKerja());
-        }
+//            int konfirmasi = JOptionPane.showConfirmDialog(this, "Sistem Belum Di Konfigurasi\nLakukan Konfigurasi Sekarang ? ?", "Pesan Sistem", OPTION, JOptionPane.QUESTION_MESSAGE);
+//            if (konfirmasi == JOptionPane.OK_OPTION) {
+//                try {
+//                    desktoPane.add(Sistem.getSistem());
+//                    ukuranLayar = desktoPane.getSize();
+//                    ukuranFrame = Sistem.getSistem().getSize();
+//                    Sistem.getSistem().setVisible(true);
+//                    //                Sistem.getSistem().setLocation((ukuranLayar.width - ukuranFrame.width) / 16 + 380, (ukuranLayar.height - ukuranFrame.height) / 16 + 100);
+//                    Sistem.getSistem().setLocation((ukuranLayar.width - ukuranFrame.width) / 2, (ukuranLayar.height - ukuranFrame.height) / 2);
+//                    Sistem.getSistem().setSelected(true);
+//                } catch (PropertyVetoException ex) {
+//                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if (konfirmasi == JOptionPane.CANCEL_OPTION) {
+//                System.gc();
+//                System.exit(0);
+//            }
+//        } else if (sys != null) {
+//            MainLoginState();
+//            setTanggalKerja(sys.getTglKerja());
+//        }
     }
 
     public void showMenu(boolean e) {
@@ -164,11 +145,9 @@ public class MainMenu extends javax.swing.JFrame {
         if (su.getDoClosing()) {
             mnuUtility.setVisible(true);
             mnuItemClosingBulan.setVisible(true);
-            mnuItemClosingTahunan.setVisible(true);
         } else {
             mnuUtility.setVisible(false);
             mnuItemClosingBulan.setVisible(false);
-            mnuItemClosingTahunan.setVisible(false);
         }
         if (su.getAddUser()) {
             mnuKonfigurasi.setVisible(true);
@@ -186,10 +165,8 @@ public class MainMenu extends javax.swing.JFrame {
         }
         if (su.getChangeBonus()) {
             mnuUtility.setVisible(true);
-            mnuItemBonusBulanan.setVisible(true);
         } else {
             mnuUtility.setVisible(false);
-            mnuItemBonusBulanan.setVisible(false);
         }
         if (su.getChangeDataSistem()) {
             mnuItemSistem.setVisible(true);
@@ -278,13 +255,6 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         desktoPane = new javax.swing.JDesktopPane();
-        lblFastTransaksi = new javax.swing.JLabel();
-        lblFastSaldoAwal = new javax.swing.JLabel();
-        lblFastPiutang = new javax.swing.JLabel();
-        lblFastMasterKendaraan = new javax.swing.JLabel();
-        lblFastKartu = new javax.swing.JLabel();
-        lblFastMasterPengemudi = new javax.swing.JLabel();
-        lblBG = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -303,131 +273,25 @@ public class MainMenu extends javax.swing.JFrame {
         mnuItemLogout = new javax.swing.JMenuItem();
         mnuItemExit = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mnuMaster = new javax.swing.JMenu();
+        mnuItemMasterBarang = new javax.swing.JMenuItem();
+        mnuItemMasterSupplier = new javax.swing.JMenuItem();
+        mnuItemMasterPengemudi = new javax.swing.JMenuItem();
+        mnuTransaksi = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        mnuLaporan = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         mnuUtility = new javax.swing.JMenu();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
         mnuItemClosingBulan = new javax.swing.JMenuItem();
-        mnuItemClosingTahunan = new javax.swing.JMenuItem();
         mnuItemSaldoAwal = new javax.swing.JMenuItem();
-        mnuItemBonusBulanan = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         mnuBantuan = new javax.swing.JMenu();
         jMenuItem17 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Aplikasi Payroll Taxi Mandala - Paperman");
-
-        lblFastTransaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/transaksi.png"))); // NOI18N
-        lblFastTransaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblFastTransaksi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblFastTransaksi.setIconTextGap(0);
-        lblFastTransaksi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lblFastTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblFastTransaksiMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFastTransaksiMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblFastTransaksiMouseExited(evt);
-            }
-        });
-        desktoPane.add(lblFastTransaksi);
-        lblFastTransaksi.setBounds(240, 260, 160, 130);
-
-        lblFastSaldoAwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/AturSaldoAwal.png"))); // NOI18N
-        lblFastSaldoAwal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblFastSaldoAwal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblFastSaldoAwalMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFastSaldoAwalMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblFastSaldoAwalMouseExited(evt);
-            }
-        });
-        desktoPane.add(lblFastSaldoAwal);
-        lblFastSaldoAwal.setBounds(470, 430, 150, 160);
-
-        lblFastPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/piutang.png"))); // NOI18N
-        lblFastPiutang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblFastPiutang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblFastPiutangMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFastPiutangMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblFastPiutangMouseExited(evt);
-            }
-        });
-        desktoPane.add(lblFastPiutang);
-        lblFastPiutang.setBounds(250, 430, 150, 150);
-
-        lblFastMasterKendaraan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/kendaraan.png"))); // NOI18N
-        lblFastMasterKendaraan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblFastMasterKendaraan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblFastMasterKendaraanMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFastMasterKendaraanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblFastMasterKendaraanMouseExited(evt);
-            }
-        });
-        desktoPane.add(lblFastMasterKendaraan);
-        lblFastMasterKendaraan.setBounds(660, 230, 180, 170);
-
-        lblFastKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/laporan.png"))); // NOI18N
-        lblFastKartu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblFastKartu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblFastKartuMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFastKartuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblFastKartuMouseExited(evt);
-            }
-        });
-        desktoPane.add(lblFastKartu);
-        lblFastKartu.setBounds(670, 420, 150, 170);
-
-        lblFastMasterPengemudi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/pengemudi.png"))); // NOI18N
-        lblFastMasterPengemudi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblFastMasterPengemudi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblFastMasterPengemudiMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFastMasterPengemudiMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblFastMasterPengemudiMouseExited(evt);
-            }
-        });
-        desktoPane.add(lblFastMasterPengemudi);
-        lblFastMasterPengemudi.setBounds(420, 250, 220, 140);
-
-        lblBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/bgNew1024x768.png"))); // NOI18N
-        lblBG.setPreferredSize(desktoPane.getSize());
-        desktoPane.add(lblBG);
-        lblBG.setBounds(0, -400, 2000, 1500);
+        setTitle("Sistem Informasi Inventaris Taxi Mandala - Mintory");
 
         jLabel1.setText("User = ");
 
@@ -531,23 +395,38 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuFile);
 
-        jMenu1.setText("Master");
+        mnuMaster.setText("Master");
 
-        jMenuItem1.setText("Master Kode Barang");
-        jMenu1.add(jMenuItem1);
+        mnuItemMasterBarang.setText("Master Barang");
+        mnuItemMasterBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemMasterBarangActionPerformed(evt);
+            }
+        });
+        mnuMaster.add(mnuItemMasterBarang);
 
-        jMenuItem2.setText("Master Kode Supplier");
-        jMenu1.add(jMenuItem2);
+        mnuItemMasterSupplier.setText("Master Supplier");
+        mnuItemMasterSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemMasterSupplierActionPerformed(evt);
+            }
+        });
+        mnuMaster.add(mnuItemMasterSupplier);
 
-        jMenuItem3.setText("Master Pengemudi");
-        jMenu1.add(jMenuItem3);
+        mnuItemMasterPengemudi.setText("Master Pengemudi");
+        mnuItemMasterPengemudi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemMasterPengemudiActionPerformed(evt);
+            }
+        });
+        mnuMaster.add(mnuItemMasterPengemudi);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnuMaster);
 
-        jMenu2.setText("Transaksi");
+        mnuTransaksi.setText("Transaksi");
 
         jMenuItem4.setText("Transaksi Pemakaian");
-        jMenu2.add(jMenuItem4);
+        mnuTransaksi.add(jMenuItem4);
 
         jMenuItem7.setText("Transaksi Pembelian");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -555,18 +434,18 @@ public class MainMenu extends javax.swing.JFrame {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem7);
+        mnuTransaksi.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(mnuTransaksi);
 
-        jMenu3.setText("Laporan");
+        mnuLaporan.setText("Laporan");
 
         jMenuItem8.setText("Rekapitulasi Saldo Barang");
-        jMenu3.add(jMenuItem8);
+        mnuLaporan.add(jMenuItem8);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(mnuLaporan);
 
-        mnuUtility.setText("Proses");
+        mnuUtility.setText("Utility");
         mnuUtility.add(jSeparator11);
 
         mnuItemClosingBulan.setText("Proses Akhir Bulan");
@@ -577,14 +456,6 @@ public class MainMenu extends javax.swing.JFrame {
         });
         mnuUtility.add(mnuItemClosingBulan);
 
-        mnuItemClosingTahunan.setText("Proses Akhir Tahun");
-        mnuItemClosingTahunan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuItemClosingTahunanActionPerformed(evt);
-            }
-        });
-        mnuUtility.add(mnuItemClosingTahunan);
-
         mnuItemSaldoAwal.setText("Input Saldo Awal");
         mnuItemSaldoAwal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -592,14 +463,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         mnuUtility.add(mnuItemSaldoAwal);
-
-        mnuItemBonusBulanan.setText("Input Bonus Bulanan");
-        mnuItemBonusBulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuItemBonusBulananActionPerformed(evt);
-            }
-        });
-        mnuUtility.add(mnuItemBonusBulanan);
         mnuUtility.add(jSeparator12);
 
         jMenuBar1.add(mnuUtility);
@@ -702,28 +565,6 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuItemClosingBulanActionPerformed
 
-    private void mnuItemClosingTahunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemClosingTahunanActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (ClosingTahunan.getFormClosingTahun() == null || ClosingTahunan.getFormClosingTahun().isClosed()) {
-                ClosingTahunan.inisialisasi();
-                desktoPane.add(ClosingTahunan.getFormClosingTahun());
-                ukuranLayar = desktoPane.getSize();
-                ukuranFrame = ClosingTahunan.getFormClosingTahun().getSize();
-            } else {
-                ClosingTahunan.getFormClosingTahun().toFront();
-                ClosingTahunan.getFormClosingTahun().show();
-            }
-            ClosingTahunan.getFormClosingTahun().setVisible(true);
-            ClosingTahunan.getFormClosingTahun().setLocation((ukuranLayar.width - ukuranFrame.width) / 2, (ukuranLayar.height - ukuranFrame.height) / 4);
-            ClosingTahunan.getFormClosingTahun().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_mnuItemClosingTahunanActionPerformed
-
     private void mnuItemSaldoAwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemSaldoAwalActionPerformed
         // TODO add your handling code here:
         try {
@@ -745,88 +586,6 @@ public class MainMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_mnuItemSaldoAwalActionPerformed
-
-    private void mnuItemBonusBulananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemBonusBulananActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (InputBonusBulanan.getFormInputBonusBulanan() == null || InputBonusBulanan.getFormInputBonusBulanan().isClosed()) {
-                InputBonusBulanan.inisialisasi();
-                desktoPane.add(InputBonusBulanan.getFormInputBonusBulanan());
-                ukuranLayar = desktoPane.getSize();
-                ukuranFrame = InputBonusBulanan.getFormInputBonusBulanan().getSize();
-            } else {
-                InputBonusBulanan.getFormInputBonusBulanan().toFront();
-                InputBonusBulanan.getFormInputBonusBulanan().show();
-            }
-            InputBonusBulanan.getFormInputBonusBulanan().setVisible(true);
-            InputBonusBulanan.getFormInputBonusBulanan().setLocation((ukuranLayar.width - ukuranFrame.width) / 2, (ukuranLayar.height - ukuranFrame.height) / 4);
-            InputBonusBulanan.getFormInputBonusBulanan().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_mnuItemBonusBulananActionPerformed
-
-    private void lblFastTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastTransaksiMouseClicked
-        // TODO add your handling code here:
-        try {
-            if (TransaksiSetoran.getTransaksiSetoran() == null || TransaksiSetoran.getTransaksiSetoran().isClosed()) {
-                TransaksiSetoran.inisialisasi();
-                desktoPane.add(TransaksiSetoran.getTransaksiSetoran());
-            } else {
-                TransaksiSetoran.getTransaksiSetoran().setMaximum(true);
-                TransaksiSetoran.getTransaksiSetoran().toFront();
-            }
-            TransaksiSetoran.getTransaksiSetoran().setVisible(true);
-            TransaksiSetoran.getTransaksiSetoran().setSize(desktoPane.getSize());
-            TransaksiSetoran.getTransaksiSetoran().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_lblFastTransaksiMouseClicked
-
-    private void lblFastMasterPengemudiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastMasterPengemudiMouseClicked
-        // TODO add your handling code here:
-        try {
-            if (MasterPengemudi.getMasterPengemudi() == null || MasterPengemudi.getMasterPengemudi().isClosed()) {
-                MasterPengemudi.inisialisasi();
-                desktoPane.add(MasterPengemudi.getMasterPengemudi());
-            } else {
-                MasterPengemudi.getMasterPengemudi().setMaximum(true);
-                MasterPengemudi.getMasterPengemudi().toFront();
-            }
-            MasterPengemudi.getMasterPengemudi().setVisible(true);
-            MasterPengemudi.getMasterPengemudi().setSize(desktoPane.getSize());
-            MasterPengemudi.getMasterPengemudi().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_lblFastMasterPengemudiMouseClicked
-
-    private void lblFastPiutangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastPiutangMouseClicked
-        // TODO add your handling code here:
-        try {
-            if (ManajemenPiutang.getManajemenPiutang() == null || ManajemenPiutang.getManajemenPiutang().isClosed()) {
-                ManajemenPiutang.inisialisasi();
-                desktoPane.add(ManajemenPiutang.getManajemenPiutang());
-            } else {
-                ManajemenPiutang.getManajemenPiutang().toFront();
-                ManajemenPiutang.getManajemenPiutang().show();
-            }
-            ManajemenPiutang.getManajemenPiutang().setVisible(true);
-            ManajemenPiutang.getManajemenPiutang().setSize(desktoPane.getSize());
-            ManajemenPiutang.getManajemenPiutang().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_lblFastPiutangMouseClicked
 
     private void mnuItemUserRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemUserRoleActionPerformed
         // TODO add your handling code here:
@@ -858,130 +617,6 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         new UserLoginUbahSistem().showMainLoginDialog(SecurityConstants.LOGIN_SYSTEM);
     }//GEN-LAST:event_mnuItemLoginActionPerformed
-
-    private void lblFastMasterKendaraanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastMasterKendaraanMouseClicked
-        // TODO add your handling code here:
-        try {
-            if (MasterKendaraan.getMasterKendaraan() == null || MasterKendaraan.getMasterKendaraan().isClosed()) {
-                MasterKendaraan.inisialisasi();
-                desktoPane.add(MasterKendaraan.getMasterKendaraan());
-            } else {
-                MasterKendaraan.getMasterKendaraan().setMaximum(true);
-                MasterKendaraan.getMasterKendaraan().toFront();
-            }
-            MasterKendaraan.getMasterKendaraan().setVisible(true);
-            MasterKendaraan.getMasterKendaraan().setSize(desktoPane.getSize());
-            MasterKendaraan.getMasterKendaraan().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_lblFastMasterKendaraanMouseClicked
-
-    private void lblFastSaldoAwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastSaldoAwalMouseClicked
-        // TODO add your handling code here:
-        try {
-            if (SaldoAwal.getFormSaldoAwal() == null || SaldoAwal.getFormSaldoAwal().isClosed()) {
-                SaldoAwal.inisialisasi();
-                desktoPane.add(SaldoAwal.getFormSaldoAwal());
-                ukuranLayar = desktoPane.getSize();
-                ukuranFrame = SaldoAwal.getFormSaldoAwal().getSize();
-            } else {
-                SaldoAwal.getFormSaldoAwal().setMaximum(true);
-                SaldoAwal.getFormSaldoAwal().toFront();
-            }
-            SaldoAwal.getFormSaldoAwal().setVisible(true);
-            SaldoAwal.getFormSaldoAwal().setLocation((ukuranLayar.width - ukuranFrame.width) / 2, (ukuranLayar.height - ukuranFrame.height) / 4);
-            SaldoAwal.getFormSaldoAwal().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_lblFastSaldoAwalMouseClicked
-
-    private void lblFastKartuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastKartuMouseClicked
-        // TODO add your handling code here:
-        try {
-            if (LaporanKartuBayar.getKartuPembayaran() == null || LaporanKartuBayar.getKartuPembayaran().isClosed()) {
-                LaporanKartuBayar.inisialisasi();
-                desktoPane.add(LaporanKartuBayar.getKartuPembayaran());
-            } else {
-                LaporanKartuBayar.getKartuPembayaran().setMaximum(true);
-                LaporanKartuBayar.getKartuPembayaran().toFront();
-            }
-            LaporanKartuBayar.getKartuPembayaran().setVisible(true);
-            LaporanKartuBayar.getKartuPembayaran().setSize(desktoPane.getSize());
-            LaporanKartuBayar.getKartuPembayaran().setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (RemoteConnectFailureException rc) {
-            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_lblFastKartuMouseClicked
-
-    private void lblFastTransaksiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastTransaksiMouseEntered
-        // TODO add your handling code here:
-//        for (int i =lblFastTransaksi.getY(); i == 20;) {
-            lblFastTransaksi.setLocation(lblFastTransaksi.getX(), lblFastTransaksi.getY() - 20);
-//        }
-    }//GEN-LAST:event_lblFastTransaksiMouseEntered
-
-    private void lblFastTransaksiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastTransaksiMouseExited
-        // TODO add your handling code here:
-        lblFastTransaksi.setLocation(lblFastTransaksi.getX(), lblFastTransaksi.getY() + 20);
-    }//GEN-LAST:event_lblFastTransaksiMouseExited
-
-    private void lblFastMasterPengemudiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastMasterPengemudiMouseEntered
-        // TODO add your handling code here:
-        lblFastMasterPengemudi.setLocation(lblFastMasterPengemudi.getX(), lblFastMasterPengemudi.getY() - 20);
-    }//GEN-LAST:event_lblFastMasterPengemudiMouseEntered
-
-    private void lblFastMasterPengemudiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastMasterPengemudiMouseExited
-        // TODO add your handling code here:
-        lblFastMasterPengemudi.setLocation(lblFastMasterPengemudi.getX(), lblFastMasterPengemudi.getY() + 20);
-    }//GEN-LAST:event_lblFastMasterPengemudiMouseExited
-
-    private void lblFastMasterKendaraanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastMasterKendaraanMouseEntered
-        // TODO add your handling code here:
-        lblFastMasterKendaraan.setLocation(lblFastMasterKendaraan.getX(), lblFastMasterKendaraan.getY() - 20);
-    }//GEN-LAST:event_lblFastMasterKendaraanMouseEntered
-
-    private void lblFastMasterKendaraanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastMasterKendaraanMouseExited
-        // TODO add your handling code here:
-        lblFastMasterKendaraan.setLocation(lblFastMasterKendaraan.getX(), lblFastMasterKendaraan.getY() + 20);
-    }//GEN-LAST:event_lblFastMasterKendaraanMouseExited
-
-    private void lblFastPiutangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastPiutangMouseEntered
-        // TODO add your handling code here:
-        lblFastPiutang.setLocation(lblFastPiutang.getX(), lblFastPiutang.getY() - 20);
-    }//GEN-LAST:event_lblFastPiutangMouseEntered
-
-    private void lblFastPiutangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastPiutangMouseExited
-        // TODO add your handling code here:
-        lblFastPiutang.setLocation(lblFastPiutang.getX(), lblFastPiutang.getY() + 20);
-    }//GEN-LAST:event_lblFastPiutangMouseExited
-
-    private void lblFastSaldoAwalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastSaldoAwalMouseEntered
-        // TODO add your handling code here:
-        lblFastSaldoAwal.setLocation(lblFastSaldoAwal.getX(), lblFastSaldoAwal.getY() - 20);
-    }//GEN-LAST:event_lblFastSaldoAwalMouseEntered
-
-    private void lblFastSaldoAwalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastSaldoAwalMouseExited
-        // TODO add your handling code here:
-        lblFastSaldoAwal.setLocation(lblFastSaldoAwal.getX(), lblFastSaldoAwal.getY() + 20);
-    }//GEN-LAST:event_lblFastSaldoAwalMouseExited
-
-    private void lblFastKartuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastKartuMouseEntered
-        // TODO add your handling code here:
-        lblFastKartu.setLocation(lblFastKartu.getX(), lblFastKartu.getY() - 20);
-    }//GEN-LAST:event_lblFastKartuMouseEntered
-
-    private void lblFastKartuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFastKartuMouseExited
-        // TODO add your handling code here:
-        lblFastKartu.setLocation(lblFastKartu.getX(), lblFastKartu.getY() + 20);
-}//GEN-LAST:event_lblFastKartuMouseExited
 
     private void mnuItemUbahSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemUbahSaldoActionPerformed
         // TODO add your handling code here:
@@ -1026,6 +661,66 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void mnuItemMasterBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemMasterBarangActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (MasterBarang.getMasterBarang() == null || MasterBarang.getMasterBarang().isClosed()) {
+                MasterBarang.inisialisasi();
+                desktoPane.add(MasterBarang.getMasterBarang());
+            } else {
+                MasterBarang.getMasterBarang().toFront();
+                MasterBarang.getMasterBarang().show();
+            }
+            MasterBarang.getMasterBarang().setVisible(true);
+            MasterBarang.getMasterBarang().setSize(desktoPane.getSize());
+            MasterBarang.getMasterBarang().setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (RemoteConnectFailureException rc) {
+            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mnuItemMasterBarangActionPerformed
+
+    private void mnuItemMasterSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemMasterSupplierActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (MasterSupplier.getMasterSupplier() == null || MasterSupplier.getMasterSupplier().isClosed()) {
+                MasterSupplier.inisialisasi();
+                desktoPane.add(MasterSupplier.getMasterSupplier());
+            } else {
+                MasterSupplier.getMasterSupplier().toFront();
+                MasterSupplier.getMasterSupplier().show();
+            }
+            MasterSupplier.getMasterSupplier().setVisible(true);
+            MasterSupplier.getMasterSupplier().setSize(desktoPane.getSize());
+            MasterSupplier.getMasterSupplier().setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (RemoteConnectFailureException rc) {
+            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mnuItemMasterSupplierActionPerformed
+
+    private void mnuItemMasterPengemudiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemMasterPengemudiActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (MasterPengemudi.getMasterPengemudi() == null || MasterPengemudi.getMasterPengemudi().isClosed()) {
+                MasterPengemudi.inisialisasi();
+                desktoPane.add(MasterPengemudi.getMasterPengemudi());
+            } else {
+                MasterPengemudi.getMasterPengemudi().toFront();
+                MasterPengemudi.getMasterPengemudi().show();
+            }
+            MasterPengemudi.getMasterPengemudi().setVisible(true);
+            MasterPengemudi.getMasterPengemudi().setSize(desktoPane.getSize());
+            MasterPengemudi.getMasterPengemudi().setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (RemoteConnectFailureException rc) {
+            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mnuItemMasterPengemudiActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1033,14 +728,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktoPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
@@ -1049,30 +738,27 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JLabel lblBG;
-    private javax.swing.JLabel lblFastKartu;
-    private javax.swing.JLabel lblFastMasterKendaraan;
-    private javax.swing.JLabel lblFastMasterPengemudi;
-    private javax.swing.JLabel lblFastPiutang;
-    private javax.swing.JLabel lblFastSaldoAwal;
-    private javax.swing.JLabel lblFastTransaksi;
     private javax.swing.JLabel lblTanggalKerja;
     private javax.swing.JLabel lblUser;
     private javax.swing.JMenu mnuBantuan;
     private javax.swing.JMenu mnuFile;
-    private javax.swing.JMenuItem mnuItemBonusBulanan;
     private javax.swing.JMenuItem mnuItemClosingBulan;
-    private javax.swing.JMenuItem mnuItemClosingTahunan;
     private javax.swing.JMenuItem mnuItemExit;
     private javax.swing.JMenuItem mnuItemKode;
     private javax.swing.JMenuItem mnuItemKonfigSAPth;
     private javax.swing.JMenuItem mnuItemLogin;
     private javax.swing.JMenuItem mnuItemLogout;
+    private javax.swing.JMenuItem mnuItemMasterBarang;
+    private javax.swing.JMenuItem mnuItemMasterPengemudi;
+    private javax.swing.JMenuItem mnuItemMasterSupplier;
     private javax.swing.JMenuItem mnuItemSaldoAwal;
     private javax.swing.JMenuItem mnuItemSistem;
     private javax.swing.JMenuItem mnuItemUbahSaldo;
     private javax.swing.JMenuItem mnuItemUserRole;
     private javax.swing.JMenu mnuKonfigurasi;
+    private javax.swing.JMenu mnuLaporan;
+    private javax.swing.JMenu mnuMaster;
+    private javax.swing.JMenu mnuTransaksi;
     private javax.swing.JMenu mnuUtility;
     // End of variables declaration//GEN-END:variables
 }

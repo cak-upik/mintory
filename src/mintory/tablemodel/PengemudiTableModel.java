@@ -7,19 +7,19 @@ package mintory.tablemodel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import mintory.model.pengemudi;
+import mintory.model.Pengemudi;
 
 /**
  *
  * @author i1440ns
  */
 public class PengemudiTableModel extends AbstractTableModel {
-    private List<pengemudi> listPengemudi;
-    private String[] kolom = {"Lambung","NRP", "Nama", "Alamat", "Kota", "Tgl Masuk", "Masa Kontrak"};
-    private pengemudi kemudi;
+    private List<Pengemudi> listPengemudi;
+    private String[] kolom = {"NRP", "Nama", "Alamat", "Kota","Keterangan"};
+    private Pengemudi kemudi;
 
-    public PengemudiTableModel(List<pengemudi> listPengemudi) {
-        this.listPengemudi = listPengemudi;
+    public PengemudiTableModel(List<Pengemudi> listPengemudis) {
+        this.listPengemudi = listPengemudis;
     }
 
     public int getRowCount() {
@@ -36,15 +36,13 @@ public class PengemudiTableModel extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int column) {
-        pengemudi p = listPengemudi.get(row);
+        Pengemudi p = listPengemudi.get(row);
         switch(column) {
-            case 0 : return p.getKend().getNoLambung();
-            case 1 : return p.getNrp();
-            case 2 : return p.getNama();
-            case 3 : return p.getAlamat();
-            case 4 : return p.getKota();
-            case 5 : return p.getTglMasuk();
-            case 6 : return p.getKontrakHari() + " Hari" + p.getKontrakBulan() + " Bulan";
+            case 0 : return p.getNrp();
+            case 1 : return p.getNama();
+            case 2 : return p.getAlamat();
+            case 3 : return p.getKota();
+            case 4 : return p.getKeterangan();
             default: return new Object();
         }
     }

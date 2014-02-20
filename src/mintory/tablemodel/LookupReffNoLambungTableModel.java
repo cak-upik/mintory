@@ -7,8 +7,8 @@ package mintory.tablemodel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import mintory.model.kendaraan;
-import mintory.model.pengemudi;
+import mintory.model.Barang;
+import mintory.model.Supplier;
 import mintory.model.setoranDetail;
 
 /**
@@ -39,11 +39,11 @@ public class LookupReffNoLambungTableModel extends AbstractTableModel {
     public Object getValueAt(int row, int column) {
         setoranDetail d = listSetoranDetail.get(row);
         switch(column) {
-            case 0 : return d.getKend().getNoLambung();
-            case 1 : return d.getKemudi().getNrp();
-            case 2 : return d.getKemudi().getNama();
-            case 3 : return d.getKend().getTglJatuhTempo();
-            case 4 : return d.getKend().getKeterangan();
+//            case 0 : return d.getKend().getNoLambung();
+//            case 1 : return d.getKemudi().getNrp();
+//            case 2 : return d.getKemudi().getNama();
+//            case 3 : return d.getKend().getTglJatuhTempo();
+//            case 4 : return d.getKend().getKeterangan();
             default : return new Object();
         }
     }

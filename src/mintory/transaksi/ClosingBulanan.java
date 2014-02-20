@@ -356,159 +356,159 @@ public class ClosingBulanan extends javax.swing.JInternalFrame {
 
     private void btnProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsesActionPerformed
         // TODO add your handling code here:
-        int maxDateOfMonth = new DateTime(sys.getTglKerja()).dayOfMonth().getMaximumValue();
-        System.out.println("maxDateOfMonth = " + maxDateOfMonth);
-        int optionType = JOptionPane.OK_CANCEL_OPTION;
-        int confirm = JOptionPane.showConfirmDialog(this, "Harap Periksa Dengan Teliti Lagi Data Transaksi Bulan " + new DateTime(bulanClosing.getDate()).monthOfYear().getAsText() + "\nYakin Akan Melakukan Closing Bulan " + new DateTime(bulanClosing.getDate()).monthOfYear().getAsText()+"? ?", "Konfirmasi", optionType, JOptionPane.QUESTION_MESSAGE);
-        if (confirm == JOptionPane.OK_OPTION) {
-            if (bulanClosing.getDate() != null && checkBackUp.isSelected()) {
-                if (cmbJenisArmada.getSelectedItem().toString().equalsIgnoreCase("PUTIH")) {
-                    if (OpenClosedTrans.isUpdatingClosingPutih == true) {
-                        List<setoranDetailPutih> listSdtPth = Main.getTransaksiService().findAvailableSetoranPutih(isClosedStatus.AVAILABLE, OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing);
-                        for (int i = 0; i <= listSdtPth.size() - 1; i++) {
-                            closingBulananPutih clbPth = Main.getTransaksiService().findClosingPutihByRefNoLambung(listSdtPth.get(i).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing);
-                            setoranPutih storPth = listSdtPth.get(i).getSetor_map_putih();
-                            storPth.setClosedStatus(isClosedStatus.CLOSED);
-                            storPth.setIdClosing(clbPth);
-                            Main.getTransaksiService().save(storPth);
-                        }
-                        for (int a = 0; a < OpenClosedTrans.lastUpdatedPutih.size(); a++) {
-                            closingBulananPutih clbPutih = Main.getTransaksiService().findClosingPutihByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing);
-                            clbPutih.setTotalSetor(Main.getTransaksiService().sumSetoranPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalSetor()));
-                            clbPutih.setTotalAngsuran(Main.getTransaksiService().sumAngsuranPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalAngsuran()));
-                            clbPutih.setTotalTabungan(Main.getTransaksiService().sumTabunganPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalTabungan()));
-                            clbPutih.setTotalBayarKas(Main.getTransaksiService().sumBayarKasbonPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalBayarKas()));
-                            clbPutih.setTotalOvertime(Main.getTransaksiService().sumOvertimePutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalOvertime()));
-                            clbPutih.setTotalCicilan(Main.getTransaksiService().sumCicilanPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalCicilan()));
-                            clbPutih.setPeriodeBulan(bulanClosing.getDate());
-                            clbPutih.setTglClosing(bulanClosing.getDate());
-                            clbPutih.setClosedFor(isClosedFor.CLOSING_SALDO_BULAN_LALU);
-                            Main.getTransaksiService().save(clbPutih);
-                            System.out.println("lastUpdatedClosedTransLambungPutih= " + OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung().toString());
-                            System.out.println("a= " + a);
-                        }
-                        OpenClosedTrans.isUpdatingClosingPutih = false;
-                        doneUpdatingOpenedClosing = true;
-                        OpenClosedTrans.lastClosing = null;
-                        OpenClosedTrans.lastSelectedTagArmada = "";
-                        OpenClosedTrans.lastUpdatedPutih = null;
-                        if (TransaksiSetoranPutih.getTransaksiSetoranPutih().isVisible()) {
-                            TransaksiSetoranPutih.destroy();
-                        }
-                    }
-                    if (new DateTime(Main.getSistemService().sistemRecord().getTglKerja().getTime()).getDayOfMonth() == maxDateOfMonth) {
-                        setClosingPutih();
-                        if (closingState == true) {
-                            List<setoranPutih> listSetoranPutih = Main.getTransaksiService().setoranPutihRecordInCustomRange(bulanClosing.getDate());
-                            for (setoranPutih stPth : listSetoranPutih) {
-                                stPth.setIdClosing(Main.getTransaksiService().findNewClosingPutihByRefNoLambung(stPth.getDetailPutih().get(0).getKemudiPutih().getKendPutih().getNoLambung(), bulanClosing.getDate()));
-                                stPth.setClosedStatus(isClosedStatus.CLOSED);
-                                Main.getTransaksiService().save(stPth);
-                            }
-                            Main.getMainMenu().setTanggalKerja(new DateTime(bulanClosing.getDate().getTime()).plusMonths(1).toDate());
-                            JOptionPane.showMessageDialog(this, "Transaksi Setoran Putih Closing Bulanan Telah Dilakukan Oleh 'Set User'", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                            if (OsUtils.isWindows()) {
-                                doBackupMysql("localhost", "root", "root", "papermandb", "src\\paperman\\backupDB\\backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
-                            } else if (OsUtils.isUnix()) {
-                                doBackupMysql("localhost", "root", "root", "papermandb", "src/paperman/backupDB/backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
-                            }
-                            closingState = false;
-                            destroy();
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Transaksi Setoran PUTIH GAGAL Closing Bulanan", "Pesan Sistem", JOptionPane.ERROR_MESSAGE);
-                            closingBulananPutihModel = null;
-                            sys = null;
-                            destroy();
-                        }
-                    } else {
-                        if (doneUpdatingOpenedClosing == true) {
-                            JOptionPane.showMessageDialog(this, "Proses Closing Transaksi Yang Dibuka Sukses Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Tanggal Ini Belum Mencapai Akhir Bulan\nClosing Bulanan Tidak Dapat Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        bulanClosing.setEnabled(false);
-                        checkBackUp.setEnabled(false);
-                        btnProses.setEnabled(false);
-                        cmbJenisArmada.setEnabled(false);
-                    }
-                } else if (cmbJenisArmada.getSelectedItem().toString().endsWith("BIRU")) {
-                    if (OpenClosedTrans.isUpdatingClosingBiru == true) {
-                        List<setoranDetail> listSdt = Main.getTransaksiService().findAvailableSetoran(isClosedStatus.AVAILABLE, OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing, OpenClosedTrans.lastSelectedTagArmada);
-                        for (int i = 0; i <= listSdt.size() - 1; i++) {
-                            closingBulanan clb = Main.getTransaksiService().findClosingByRefNoLambung(listSdt.get(i).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing);
-                            setoran stor = listSdt.get(i).getSetor_map();
-                            stor.setClosedStatus(isClosedStatus.CLOSED);
-                            stor.setIdClosing(clb);
-                            Main.getTransaksiService().save(stor);
-                        }
-                        for (int a = 0; a < OpenClosedTrans.lastUpdated.size(); a++) {
-                            closingBulanan clb = Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing);
-                            clb.setTotalSetor(Main.getTransaksiService().sumSetoran(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalSetor()));
-                            clb.setTotalAngsuran(Main.getTransaksiService().sumAngsuran(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalAngsuran()));
-                            clb.setTotalTabungan(Main.getTransaksiService().sumTabungan(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalTabungan()));
-                            clb.setTotalBayarKas(Main.getTransaksiService().sumBayarKasbon(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalBayarKas()));
-                            clb.setTotalOvertime(Main.getTransaksiService().sumOvertime(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalOvertime()));
-                            clb.setTotalCicilan(Main.getTransaksiService().sumCicilan(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalCicilan()));
-                            clb.setPeriodeBulan(bulanClosing.getDate());
-                            clb.setTglClosing(bulanClosing.getDate());
-                            clb.setClosedFor(isClosedFor.CLOSING_SALDO_BULAN_LALU);
-                            Main.getTransaksiService().save(clb);
-                            System.out.println("lastUpdatedClosedTransLambung = " + OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung().toString());
-                            System.out.println("a= " + a);
-                        }
-                        OpenClosedTrans.isUpdatingClosingBiru = false;
-                        doneUpdatingOpenedClosing = true;
-                        OpenClosedTrans.lastClosing = null;
-                        OpenClosedTrans.lastSelectedTagArmada = "";
-                        OpenClosedTrans.lastUpdated = null;
-                        if (TransaksiSetoran.getTransaksiSetoran().isVisible()) {
-                            TransaksiSetoran.destroy();
-                        }
-                    }
-                    if (new DateTime(Main.getSistemService().sistemRecord().getTglKerja()).getDayOfMonth() == maxDateOfMonth) {
-                        setClosing();
-                        if (closingState == true) {
-                            List<setoran> listSetoran = Main.getTransaksiService().setoranRecordInCustomRange(bulanClosing.getDate(), listKomposisi.get(cmbJenisArmada.getSelectedIndex()));
-                            for (setoran st : listSetoran) {
-                                st.setIdClosing(Main.getTransaksiService().findNewClosingByRefNoLambung(st.getDetail().get(0).getKemudi().getKend().getNoLambung(), bulanClosing.getDate()));
-                                st.setClosedStatus(isClosedStatus.CLOSED);
-                                Main.getTransaksiService().save(st);
-                            }
-                            Main.getMainMenu().setTanggalKerja(new DateTime(bulanClosing.getDate().getTime()).plusMonths(1).toDate());
-                            JOptionPane.showMessageDialog(this, "Transaksi Setoran Biru Closing Bulanan Telah Dilakukan Oleh 'Set User'", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                            if (OsUtils.isWindows()) {
-                                doBackupMysql("localhost", "root", "root", "papermandb", "src\\paperman\\backupDB\\backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
-                            } else if (OsUtils.isUnix()) {
-                                doBackupMysql("localhost", "root", "root", "papermandb", "src/paperman/backupDB/backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
-                            }
-                            closingState = false;
-                            destroy();
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Transaksi Setoran Biru GAGAL Closing Bulanan", "Pesan Sistem", JOptionPane.ERROR_MESSAGE);
-                            closingModel = null;
-                            sys = null;
-                            destroy();
-                        }
-                    } else {
-                        if (doneUpdatingOpenedClosing == true) {
-                            JOptionPane.showMessageDialog(this, "Proses Closing Transaksi Yang Dibuka Sukses Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Tanggal Ini Belum Mencapai Akhir Bulan\nClosing Bulanan Tidak Dapat Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                        bulanClosing.setEnabled(false);
-                        checkBackUp.setEnabled(false);
-                        btnProses.setEnabled(false);
-                        cmbJenisArmada.setEnabled(false);
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Harap Isi Periode Bulan Dan Pilih Backup Database", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-        }
-        if (confirm == JOptionPane.CANCEL_OPTION) {
-            return;
-        }
+//        int maxDateOfMonth = new DateTime(sys.getTglKerja()).dayOfMonth().getMaximumValue();
+//        System.out.println("maxDateOfMonth = " + maxDateOfMonth);
+//        int optionType = JOptionPane.OK_CANCEL_OPTION;
+//        int confirm = JOptionPane.showConfirmDialog(this, "Harap Periksa Dengan Teliti Lagi Data Transaksi Bulan " + new DateTime(bulanClosing.getDate()).monthOfYear().getAsText() + "\nYakin Akan Melakukan Closing Bulan " + new DateTime(bulanClosing.getDate()).monthOfYear().getAsText()+"? ?", "Konfirmasi", optionType, JOptionPane.QUESTION_MESSAGE);
+//        if (confirm == JOptionPane.OK_OPTION) {
+//            if (bulanClosing.getDate() != null && checkBackUp.isSelected()) {
+//                if (cmbJenisArmada.getSelectedItem().toString().equalsIgnoreCase("PUTIH")) {
+//                    if (OpenClosedTrans.isUpdatingClosingPutih == true) {
+//                        List<setoranDetailPutih> listSdtPth = Main.getTransaksiService().findAvailableSetoranPutih(isClosedStatus.AVAILABLE, OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing);
+//                        for (int i = 0; i <= listSdtPth.size() - 1; i++) {
+////                            closingBulananPutih clbPth = Main.getTransaksiService().findClosingPutihByRefNoLambung(listSdtPth.get(i).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing);
+//                            setoranPutih storPth = listSdtPth.get(i).getSetor_map_putih();
+//                            storPth.setClosedStatus(isClosedStatus.CLOSED);
+//                            storPth.setIdClosing(clbPth);
+//                            Main.getTransaksiService().save(storPth);
+//                        }
+//                        for (int a = 0; a < OpenClosedTrans.lastUpdatedPutih.size(); a++) {
+//                            closingBulananPutih clbPutih = Main.getTransaksiService().findClosingPutihByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing);
+//                            clbPutih.setTotalSetor(Main.getTransaksiService().sumSetoranPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalSetor()));
+//                            clbPutih.setTotalAngsuran(Main.getTransaksiService().sumAngsuranPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalAngsuran()));
+//                            clbPutih.setTotalTabungan(Main.getTransaksiService().sumTabunganPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalTabungan()));
+//                            clbPutih.setTotalBayarKas(Main.getTransaksiService().sumBayarKasbonPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalBayarKas()));
+//                            clbPutih.setTotalOvertime(Main.getTransaksiService().sumOvertimePutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalOvertime()));
+//                            clbPutih.setTotalCicilan(Main.getTransaksiService().sumCicilanPutih(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalCicilan()));
+//                            clbPutih.setPeriodeBulan(bulanClosing.getDate());
+//                            clbPutih.setTglClosing(bulanClosing.getDate());
+//                            clbPutih.setClosedFor(isClosedFor.CLOSING_SALDO_BULAN_LALU);
+//                            Main.getTransaksiService().save(clbPutih);
+//                            System.out.println("lastUpdatedClosedTransLambungPutih= " + OpenClosedTrans.lastUpdatedPutih.get(a).getKemudiPutih().getKendPutih().getNoLambung().toString());
+//                            System.out.println("a= " + a);
+//                        }
+//                        OpenClosedTrans.isUpdatingClosingPutih = false;
+//                        doneUpdatingOpenedClosing = true;
+//                        OpenClosedTrans.lastClosing = null;
+//                        OpenClosedTrans.lastSelectedTagArmada = "";
+//                        OpenClosedTrans.lastUpdatedPutih = null;
+//                        if (TransaksiSetoranPutih.getTransaksiSetoranPutih().isVisible()) {
+//                            TransaksiSetoranPutih.destroy();
+//                        }
+//                    }
+//                    if (new DateTime(Main.getSistemService().sistemRecord().getTglKerja().getTime()).getDayOfMonth() == maxDateOfMonth) {
+//                        setClosingPutih();
+//                        if (closingState == true) {
+//                            List<setoranPutih> listSetoranPutih = Main.getTransaksiService().setoranPutihRecordInCustomRange(bulanClosing.getDate());
+//                            for (setoranPutih stPth : listSetoranPutih) {
+//                                stPth.setIdClosing(Main.getTransaksiService().findNewClosingPutihByRefNoLambung(stPth.getDetailPutih().get(0).getKemudiPutih().getKendPutih().getNoLambung(), bulanClosing.getDate()));
+//                                stPth.setClosedStatus(isClosedStatus.CLOSED);
+//                                Main.getTransaksiService().save(stPth);
+//                            }
+//                            Main.getMainMenu().setTanggalKerja(new DateTime(bulanClosing.getDate().getTime()).plusMonths(1).toDate());
+//                            JOptionPane.showMessageDialog(this, "Transaksi Setoran Putih Closing Bulanan Telah Dilakukan Oleh 'Set User'", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                            if (OsUtils.isWindows()) {
+//                                doBackupMysql("localhost", "root", "root", "papermandb", "src\\paperman\\backupDB\\backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
+//                            } else if (OsUtils.isUnix()) {
+//                                doBackupMysql("localhost", "root", "root", "papermandb", "src/paperman/backupDB/backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
+//                            }
+//                            closingState = false;
+//                            destroy();
+//                        } else {
+//                            JOptionPane.showMessageDialog(this, "Transaksi Setoran PUTIH GAGAL Closing Bulanan", "Pesan Sistem", JOptionPane.ERROR_MESSAGE);
+//                            closingBulananPutihModel = null;
+//                            sys = null;
+//                            destroy();
+//                        }
+//                    } else {
+//                        if (doneUpdatingOpenedClosing == true) {
+//                            JOptionPane.showMessageDialog(this, "Proses Closing Transaksi Yang Dibuka Sukses Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                        } else {
+//                            JOptionPane.showMessageDialog(this, "Tanggal Ini Belum Mencapai Akhir Bulan\nClosing Bulanan Tidak Dapat Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                        }
+//                        bulanClosing.setEnabled(false);
+//                        checkBackUp.setEnabled(false);
+//                        btnProses.setEnabled(false);
+//                        cmbJenisArmada.setEnabled(false);
+//                    }
+//                } else if (cmbJenisArmada.getSelectedItem().toString().endsWith("BIRU")) {
+//                    if (OpenClosedTrans.isUpdatingClosingBiru == true) {
+//                        List<setoranDetail> listSdt = Main.getTransaksiService().findAvailableSetoran(isClosedStatus.AVAILABLE, OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing, OpenClosedTrans.lastSelectedTagArmada);
+//                        for (int i = 0; i <= listSdt.size() - 1; i++) {
+////                            closingBulanan clb = Main.getTransaksiService().findClosingByRefNoLambung(listSdt.get(i).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing);
+//                            setoran stor = listSdt.get(i).getSetor_map();
+//                            stor.setClosedStatus(isClosedStatus.CLOSED);
+////                            stor.setIdClosing(clb);
+//                            Main.getTransaksiService().save(stor);
+//                        }
+//                        for (int a = 0; a < OpenClosedTrans.lastUpdated.size(); a++) {
+////                            closingBulanan clb = Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing);
+////                            clb.setTotalSetor(Main.getTransaksiService().sumSetoran(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalSetor()));
+////                            clb.setTotalAngsuran(Main.getTransaksiService().sumAngsuran(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalAngsuran()));
+////                            clb.setTotalTabungan(Main.getTransaksiService().sumTabungan(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalTabungan()));
+////                            clb.setTotalBayarKas(Main.getTransaksiService().sumBayarKasbon(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalBayarKas()));
+////                            clb.setTotalOvertime(Main.getTransaksiService().sumOvertime(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalOvertime()));
+////                            clb.setTotalCicilan(Main.getTransaksiService().sumCicilan(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), OpenClosedTrans.lastClosing, OpenClosedTrans.lastClosing).add(Main.getTransaksiService().findClosingByRefNoLambung(OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung(), new DateTime(OpenClosedTrans.lastClosing).minusMonths(1).toDate()).getTotalCicilan()));
+////                            clb.setPeriodeBulan(bulanClosing.getDate());
+////                            clb.setTglClosing(bulanClosing.getDate());
+////                            clb.setClosedFor(isClosedFor.CLOSING_SALDO_BULAN_LALU);
+////                            Main.getTransaksiService().save(clb);
+//////                            System.out.println("lastUpdatedClosedTransLambung = " + OpenClosedTrans.lastUpdated.get(a).getKemudi().getKend().getNoLambung().toString());
+//                            System.out.println("a= " + a);
+//                        }
+//                        OpenClosedTrans.isUpdatingClosingBiru = false;
+//                        doneUpdatingOpenedClosing = true;
+//                        OpenClosedTrans.lastClosing = null;
+//                        OpenClosedTrans.lastSelectedTagArmada = "";
+//                        OpenClosedTrans.lastUpdated = null;
+//                        if (TransaksiSetoran.getTransaksiSetoran().isVisible()) {
+//                            TransaksiSetoran.destroy();
+//                        }
+//                    }
+//                    if (new DateTime(Main.getSistemService().sistemRecord().getTglKerja()).getDayOfMonth() == maxDateOfMonth) {
+//                        setClosing();
+//                        if (closingState == true) {
+//                            List<setoran> listSetoran = Main.getTransaksiService().setoranRecordInCustomRange(bulanClosing.getDate(), listKomposisi.get(cmbJenisArmada.getSelectedIndex()));
+//                            for (setoran st : listSetoran) {
+////                                st.setIdClosing(Main.getTransaksiService().findNewClosingByRefNoLambung(st.getDetail().get(0).getKemudi().getKend().getNoLambung(), bulanClosing.getDate()));
+//                                st.setClosedStatus(isClosedStatus.CLOSED);
+//                                Main.getTransaksiService().save(st);
+//                            }
+//                            Main.getMainMenu().setTanggalKerja(new DateTime(bulanClosing.getDate().getTime()).plusMonths(1).toDate());
+//                            JOptionPane.showMessageDialog(this, "Transaksi Setoran Biru Closing Bulanan Telah Dilakukan Oleh 'Set User'", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                            if (OsUtils.isWindows()) {
+//                                doBackupMysql("localhost", "root", "root", "papermandb", "src\\paperman\\backupDB\\backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
+//                            } else if (OsUtils.isUnix()) {
+//                                doBackupMysql("localhost", "root", "root", "papermandb", "src/paperman/backupDB/backup" + dateFormatter.format(bulanClosing.getDate()) + ".sql");
+//                            }
+//                            closingState = false;
+//                            destroy();
+//                        } else {
+//                            JOptionPane.showMessageDialog(this, "Transaksi Setoran Biru GAGAL Closing Bulanan", "Pesan Sistem", JOptionPane.ERROR_MESSAGE);
+//                            closingModel = null;
+//                            sys = null;
+//                            destroy();
+//                        }
+//                    } else {
+//                        if (doneUpdatingOpenedClosing == true) {
+//                            JOptionPane.showMessageDialog(this, "Proses Closing Transaksi Yang Dibuka Sukses Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                        } else {
+//                            JOptionPane.showMessageDialog(this, "Tanggal Ini Belum Mencapai Akhir Bulan\nClosing Bulanan Tidak Dapat Dilakukan", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                        }
+//                        bulanClosing.setEnabled(false);
+//                        checkBackUp.setEnabled(false);
+//                        btnProses.setEnabled(false);
+//                        cmbJenisArmada.setEnabled(false);
+//                    }
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Harap Isi Periode Bulan Dan Pilih Backup Database", "Pesan Sistem", JOptionPane.INFORMATION_MESSAGE);
+//                return;
+//            }
+//        }
+//        if (confirm == JOptionPane.CANCEL_OPTION) {
+//            return;
+//        }
     }//GEN-LAST:event_btnProsesActionPerformed
 
     private void checkBackUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBackUpMouseClicked

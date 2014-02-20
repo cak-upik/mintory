@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import org.hibernate.Hibernate;
 import mintory.model.SecurityUser;
-import mintory.model.kendaraan;
+import mintory.model.Barang;
 import mintory.model.setoran;
 
 /**

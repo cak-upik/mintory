@@ -79,7 +79,7 @@ public class Main {
                 mainMenu = new MainMenu();
                 mainMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                mainMenu.IntialSystemState();
+//                mainMenu.IntialSystemState();
                 mainMenu.setVisible(true);
                 if (Main.getSistemService().sistemRecord() != null) {
                     userLogin = new UserLoginUbahSistem().showMainLoginDialog(SecurityConstants.LOGIN_SYSTEM);

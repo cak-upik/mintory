@@ -7,7 +7,7 @@ package mintory.tablemodel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import mintory.model.kendaraan;
+import mintory.model.Barang;
 import mintory.model.kendaraanPutih;
 
 /**
