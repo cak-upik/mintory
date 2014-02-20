@@ -119,26 +119,34 @@ public class toolbarButtonTransaksi extends javax.swing.JPanel {
         btnSimpan = new javax.swing.JButton();
         btnCetak = new javax.swing.JButton();
 
-        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/new.png"))); // NOI18N
-        btnTambah.setText("Tambah F1");
+        btnTambah.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/new.png"))); // NOI18N
+        btnTambah.setText("Tambah  F1");
 
-        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/stop.png"))); // NOI18N
-        btnBatal.setText("Batal F6");
+        btnBatal.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/quit.png"))); // NOI18N
+        btnBatal.setText("Batal   F6");
 
-        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/deletes.png"))); // NOI18N
-        btnHapus.setText("Hapus F4");
+        btnHapus.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/deletes.png"))); // NOI18N
+        btnHapus.setText("Hapus   F4");
 
-        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/dekstop.png"))); // NOI18N
-        btnKeluar.setText("Keluar F7");
+        btnKeluar.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/exits.png"))); // NOI18N
+        btnKeluar.setText("Keluar   F7");
 
-        btnUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/edit.png"))); // NOI18N
-        btnUbah.setText("Ubah F2");
+        btnUbah.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/edit.png"))); // NOI18N
+        btnUbah.setText("Ubah   F2");
+        btnUbah.setToolTipText("");
 
-        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/save.png"))); // NOI18N
-        btnSimpan.setText("Simpan F3");
+        btnSimpan.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/save.png"))); // NOI18N
+        btnSimpan.setText("Simpan   F3");
 
-        btnCetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paperman/images/print.png"))); // NOI18N
-        btnCetak.setText("Cetak F5");
+        btnCetak.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        btnCetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/print-icon.png"))); // NOI18N
+        btnCetak.setText("Cetak   F5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

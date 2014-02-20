@@ -18,13 +18,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/cak-upik/Documents/mintory/src/mintory/tablemodel/PiutangTableModel.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/tablemodel/BarangTableModel.java</file>
-            <file>file:/home/cak-upik/Documents/mintory/src/mintory/dialog/pnlPiutangMenuContext.java</file>
+            <file>file:/home/cak-upik/Documents/mintory/src/mintory/transaksi/TransaksiPemakaianUnit.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/hibernate.cfg.xml</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/tablemodel/LookupReffNoLambungTableModel.java</file>
-            <file>file:/home/cak-upik/Documents/mintory/src/mintory/transaksi/ManajemenPiutang.java</file>
-            <file>file:/home/cak-upik/Documents/mintory/src/mintory/transaksi/TransaksiSetoran.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/master/MasterPengemudi.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/tablemodel/TransaksiSetoranTableModel.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/model/Barang.java</file>
@@ -34,7 +31,6 @@
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/menu/MainMenu.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/master/MasterSupplier.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/splash.java</file>
-            <file>file:/home/cak-upik/Documents/mintory/src/mintory/master/MasterBarang.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/Main.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/dao/MasterPengemudiDao.java</file>
             <file>file:/home/cak-upik/Documents/mintory/src/mintory/dao/MasterBarangDao.java</file>
