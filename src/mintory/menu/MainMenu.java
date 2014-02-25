@@ -40,6 +40,7 @@ import mintory.model.codeGenerator;
 import mintory.model.sistem;
 import mintory.transaksi.ClosingBulanan;
 import mintory.transaksi.SaldoAwal;
+import mintory.transaksi.TransaksiPemakaianUnit;
 
 /**
  *
@@ -278,7 +279,7 @@ public class MainMenu extends javax.swing.JFrame {
         mnuItemMasterSupplier = new javax.swing.JMenuItem();
         mnuItemMasterPengemudi = new javax.swing.JMenuItem();
         mnuTransaksi = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mnuItemTransPemakaian = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         mnuLaporan = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -425,8 +426,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         mnuTransaksi.setText("Transaksi");
 
-        jMenuItem4.setText("Transaksi Pemakaian");
-        mnuTransaksi.add(jMenuItem4);
+        mnuItemTransPemakaian.setText("Transaksi Pemakaian");
+        mnuItemTransPemakaian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemTransPemakaianActionPerformed(evt);
+            }
+        });
+        mnuTransaksi.add(mnuItemTransPemakaian);
 
         jMenuItem7.setText("Transaksi Pembelian");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -721,6 +727,26 @@ public class MainMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_mnuItemMasterPengemudiActionPerformed
+
+    private void mnuItemTransPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemTransPemakaianActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (TransaksiPemakaianUnit.getTransaksiPemakaianUnit() == null || TransaksiPemakaianUnit.getTransaksiPemakaianUnit().isClosed()) {
+                TransaksiPemakaianUnit.inisialisasi();
+                desktoPane.add(TransaksiPemakaianUnit.getTransaksiPemakaianUnit());
+            } else {
+                TransaksiPemakaianUnit.getTransaksiPemakaianUnit().toFront();
+                TransaksiPemakaianUnit.getTransaksiPemakaianUnit().show();
+            }
+            TransaksiPemakaianUnit.getTransaksiPemakaianUnit().setVisible(true);
+            TransaksiPemakaianUnit.getTransaksiPemakaianUnit().setSize(desktoPane.getSize());
+            TransaksiPemakaianUnit.getTransaksiPemakaianUnit().setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (RemoteConnectFailureException rc) {
+            JOptionPane.showMessageDialog(this, "Koneksi Ke Server Terputus\nPeriksa Lagi Server Dan Kabel, Pastikan Dalam Keadaan Hidup dan Tersambung","Peringatan",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mnuItemTransPemakaianActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -730,7 +756,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
@@ -753,6 +778,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuItemMasterSupplier;
     private javax.swing.JMenuItem mnuItemSaldoAwal;
     private javax.swing.JMenuItem mnuItemSistem;
+    private javax.swing.JMenuItem mnuItemTransPemakaian;
     private javax.swing.JMenuItem mnuItemUbahSaldo;
     private javax.swing.JMenuItem mnuItemUserRole;
     private javax.swing.JMenu mnuKonfigurasi;

@@ -15,7 +15,7 @@ import mintory.model.Pengemudi;
  */
 public class PengemudiTableModel extends AbstractTableModel {
     private List<Pengemudi> listPengemudi;
-    private String[] kolom = {"NRP", "Nama", "Alamat", "Kota","Keterangan"};
+    private String[] kolom = {"NRP","No Lambung", "Nama", "Alamat", "Kota","Keterangan"};
     private Pengemudi kemudi;
 
     public PengemudiTableModel(List<Pengemudi> listPengemudis) {
@@ -39,10 +39,11 @@ public class PengemudiTableModel extends AbstractTableModel {
         Pengemudi p = listPengemudi.get(row);
         switch(column) {
             case 0 : return p.getNrp();
-            case 1 : return p.getNama();
-            case 2 : return p.getAlamat();
-            case 3 : return p.getKota();
-            case 4 : return p.getKeterangan();
+            case 1 : return p.getNoLB();
+            case 2 : return p.getNama();
+            case 3 : return p.getAlamat();
+            case 4 : return p.getKota();
+            case 5 : return p.getKeterangan();
             default: return new Object();
         }
     }

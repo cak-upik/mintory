@@ -268,7 +268,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
     }
 
     private void kenatilang() {
-        if (txtNRP.getText().isEmpty() && txtNama.getText().isEmpty() && txtAlamat.getText().isEmpty() && txtKota.getText().isEmpty()) {
+        if (txtNRP.getText().isEmpty() &&txtNoLambung.getText().isEmpty() && txtNama.getText().isEmpty() && txtAlamat.getText().isEmpty() && txtKota.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "!!! Tidak boleh ada field yang kosong \nPeriksa Lagi !!!", "Terjadi Error", JOptionPane.ERROR_MESSAGE);
             txtNRP.setText("TIDAK BOLEH KOSONG...");
             txtNRP.setForeground(Color.red);
@@ -278,6 +278,11 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
             txtAlamat.setForeground(Color.RED);
             txtKota.setText("TIDAK BOLEH KOSONG...");
             txtKota.setForeground(Color.red);
+        } else if (txtNoLambung.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "!!! Harap isi No Lambung !!!", "Terjadi Error", JOptionPane.ERROR_MESSAGE);
+            txtNoLambung.requestFocus();
+            txtNoLambung.setText("TIDAK BOLEH KOSONG...");
+            txtNoLambung.setForeground(Color.red);
         } else if (txtNRP.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "!!! Harap isi NRP !!!", "Terjadi Error", JOptionPane.ERROR_MESSAGE);
             txtNRP.requestFocus();
@@ -304,6 +309,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
     private void enableForm(boolean e) {
         txtNRP.setEnabled(e);
         txtNama.setEnabled(e);
+        txtNoLambung.setEnabled(e);
         txtAlamat.setEnabled(e);
         txtKota.setEnabled(e);
         txtKeterangan.setEnabled(e);
@@ -317,6 +323,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
     private void housekeeping() {
         txtNRP.setText("");
         txtNama.setText("");
+        txtNoLambung.setText("");
         txtAlamat.setText("");
         txtKota.setText("");
         txtKeterangan.setText("");
@@ -324,6 +331,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
 
     private boolean validateForm() {
         if (!txtNRP.getText().isEmpty() && !txtNRP.getText().equals("TIDAK BOLEH KOSONG...")
+                && !txtNoLambung.getText().isEmpty() && !txtNoLambung.getText().equals("TIDAK BOLEH KOSONG...")
                 && !txtNama.getText().isEmpty() && !txtNama.getText().equals("TIDAK BOLEH KOSONG...")
                 && !txtAlamat.getText().isEmpty() && !txtAlamat.getText().equals("TIDAK BOLEH KOSONG...")
                 && !txtKota.getText().isEmpty() && !txtKota.getText().equals("TIDAK BOLEH KOSONG...")) {
@@ -337,6 +345,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
             kemudi = new Pengemudi();
         }
         kemudi.setNrp(txtNRP.getText());
+        kemudi.setNoLB(txtNoLambung.getText());
         kemudi.setNama(txtNama.getText());
         kemudi.setAlamat(txtAlamat.getText());
         kemudi.setKota(txtKota.getText());
@@ -345,6 +354,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
 
     private void LoadDatabaseToForm() {
         txtNRP.setText(kemudi.getNrp());
+        txtNoLambung.setText(kemudi.getNoLB());
         txtNama.setText(kemudi.getNama());
         txtAlamat.setText(kemudi.getAlamat());
         txtKota.setText(kemudi.getKota());
@@ -354,14 +364,16 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
     private void initColumnSize() {
         tblPengemudi.getColumnModel().getColumn(0).setMinWidth(100);
         tblPengemudi.getColumnModel().getColumn(0).setMaxWidth(100);
-        tblPengemudi.getColumnModel().getColumn(1).setMinWidth(200);
-        tblPengemudi.getColumnModel().getColumn(1).setMaxWidth(200);
-        tblPengemudi.getColumnModel().getColumn(2).setMinWidth(250);
-        tblPengemudi.getColumnModel().getColumn(2).setMaxWidth(250);
-        tblPengemudi.getColumnModel().getColumn(3).setMinWidth(100);
-        tblPengemudi.getColumnModel().getColumn(3).setMaxWidth(100);
+        tblPengemudi.getColumnModel().getColumn(1).setMinWidth(100);
+        tblPengemudi.getColumnModel().getColumn(1).setMaxWidth(100);
+        tblPengemudi.getColumnModel().getColumn(2).setMinWidth(200);
+        tblPengemudi.getColumnModel().getColumn(2).setMaxWidth(200);
+        tblPengemudi.getColumnModel().getColumn(3).setMinWidth(250);
+        tblPengemudi.getColumnModel().getColumn(3).setMaxWidth(250);
         tblPengemudi.getColumnModel().getColumn(4).setMinWidth(100);
-        tblPengemudi.getColumnModel().getColumn(4).setMaxWidth(150);
+        tblPengemudi.getColumnModel().getColumn(4).setMaxWidth(100);
+        tblPengemudi.getColumnModel().getColumn(5).setMinWidth(100);
+        tblPengemudi.getColumnModel().getColumn(5).setMaxWidth(150);
     }
 
     private void LoadDatabaseToTable() {
@@ -421,6 +433,8 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtKeterangan = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        txtNoLambung = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPengemudi = new javax.swing.JTable();
         buttonMaster = new mintory.master.buttonMaster();
@@ -571,14 +585,19 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
         txtKeterangan.setRows(5);
         jScrollPane1.setViewportView(txtKeterangan);
 
+        jLabel7.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jLabel7.setText("No Lambung");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
+                    .addComponent(jLabel7)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
@@ -586,12 +605,12 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNRP, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNoLambung, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                     .addComponent(txtAlamat)
                     .addComponent(txtKota)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-                .addGap(4, 4, 4))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,7 +620,11 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNoLambung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -615,9 +638,9 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
                     .addComponent(txtKota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jSplitPane3.setRightComponent(jPanel2);
@@ -635,7 +658,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
 
             },
             new String [] {
-                "  NRP", "  Nama", "  Alamat", "  Kota", "  Keterangan"
+                "  NRP", "  No Lambung", "  Nama", "  Alamat", "  Kota", "  Keterangan"
             }
         ));
         tblPengemudi.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -644,17 +667,19 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
         if (tblPengemudi.getColumnModel().getColumnCount() > 0) {
             tblPengemudi.getColumnModel().getColumn(0).setMinWidth(100);
             tblPengemudi.getColumnModel().getColumn(0).setMaxWidth(100);
-            tblPengemudi.getColumnModel().getColumn(1).setMinWidth(200);
-            tblPengemudi.getColumnModel().getColumn(1).setMaxWidth(200);
-            tblPengemudi.getColumnModel().getColumn(2).setMinWidth(250);
-            tblPengemudi.getColumnModel().getColumn(2).setMaxWidth(250);
-            tblPengemudi.getColumnModel().getColumn(3).setMinWidth(100);
-            tblPengemudi.getColumnModel().getColumn(3).setMaxWidth(100);
+            tblPengemudi.getColumnModel().getColumn(1).setMinWidth(100);
+            tblPengemudi.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblPengemudi.getColumnModel().getColumn(2).setMinWidth(200);
+            tblPengemudi.getColumnModel().getColumn(2).setMaxWidth(200);
+            tblPengemudi.getColumnModel().getColumn(3).setMinWidth(250);
+            tblPengemudi.getColumnModel().getColumn(3).setMaxWidth(250);
             tblPengemudi.getColumnModel().getColumn(4).setMinWidth(100);
-            tblPengemudi.getColumnModel().getColumn(4).setMaxWidth(150);
+            tblPengemudi.getColumnModel().getColumn(4).setMaxWidth(100);
+            tblPengemudi.getColumnModel().getColumn(5).setMinWidth(100);
+            tblPengemudi.getColumnModel().getColumn(5).setMaxWidth(150);
         }
 
-        jSplitPane2.setRightComponent(jScrollPane2);
+        jSplitPane2.setBottomComponent(jScrollPane2);
 
         jSplitPane1.setBottomComponent(jSplitPane2);
 
@@ -779,6 +804,7 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -795,5 +821,6 @@ public class MasterPengemudi extends javax.swing.JInternalFrame implements ListS
     private javax.swing.JTextField txtKota;
     private javax.swing.JTextField txtNRP;
     private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtNoLambung;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,26 @@
+Working in transaction form
+
+1. MVC
+	~ Model
+	~ Service
+	~ Dao
+	~ TableModel
+	
+2. CRUD
+	~ aksiSimpan, cekDuplicate
+	~ aksiHapus
+	~ LoadDataToForm
+	~ LoadFormToData
+	~ LoadDataToTable
+
+3. UI
+	~ validateForm
+	~ buttonHotkeyListener
+	~ List selection
+	~ Load Barang To Pemakaian Unit
+	~ dialog ubah
+	~ dialog nrp
+	~ aksiCetak
+	~ aksiCari
+
+4. Testing

@@ -25,6 +25,8 @@ public class Pengemudi implements Serializable {
     private Integer id;
     @Column(name = "nrp", unique = true, nullable = false)
     private String nrp;
+    @Column(name = "lambung")
+    private String noLB;
     @Column(name = "nama")
     private String nama;
     @Column(name = "alamat")
@@ -42,6 +44,14 @@ public class Pengemudi implements Serializable {
         this.id = id;
     }
 
+    public String getNoLB() {
+        return noLB;
+    }
+
+    public void setNoLB(String noLB) {
+        this.noLB = noLB;
+    }
+    
     public String getNrp() {
         return nrp;
     }

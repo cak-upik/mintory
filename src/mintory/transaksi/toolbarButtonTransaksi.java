@@ -121,39 +121,39 @@ public class toolbarButtonTransaksi extends javax.swing.JPanel {
 
         btnTambah.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/new.png"))); // NOI18N
-        btnTambah.setText("Tambah  F1");
+        btnTambah.setText("Tambah F1");
 
         btnBatal.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/quit.png"))); // NOI18N
-        btnBatal.setText("Batal   F6");
+        btnBatal.setText("Batal F6");
 
         btnHapus.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/deletes.png"))); // NOI18N
-        btnHapus.setText("Hapus   F4");
+        btnHapus.setText("Hapus F4");
 
         btnKeluar.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/exits.png"))); // NOI18N
-        btnKeluar.setText("Keluar   F7");
+        btnKeluar.setText("Keluar F7");
 
         btnUbah.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnUbah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/edit.png"))); // NOI18N
-        btnUbah.setText("Ubah   F2");
+        btnUbah.setText("Ubah F2");
         btnUbah.setToolTipText("");
 
         btnSimpan.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/save.png"))); // NOI18N
-        btnSimpan.setText("Simpan   F3");
+        btnSimpan.setText("Simpan F3");
 
         btnCetak.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
         btnCetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mintory/images/print-icon.png"))); // NOI18N
-        btnCetak.setText("Cetak   F5");
+        btnCetak.setText("Cetak F5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUbah)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,7 +168,7 @@ public class toolbarButtonTransaksi extends javax.swing.JPanel {
                 .addComponent(btnKeluar))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnCetak, btnHapus, btnKeluar, btnSimpan, btnTambah, btnUbah});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnCetak, btnHapus, btnKeluar, btnSimpan, btnUbah});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,6 +185,7 @@ public class toolbarButtonTransaksi extends javax.swing.JPanel {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnCetak, btnHapus, btnKeluar, btnSimpan, btnTambah, btnUbah});
 
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBatal;
     private javax.swing.JButton btnCetak;
